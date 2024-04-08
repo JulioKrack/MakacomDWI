@@ -24,7 +24,7 @@ import java.nio.file.Paths;
 )
 public class ctrlMarcas extends HttpServlet {
     private MarcasDAO mDAO=new MarcasDAO();
-    private String rutaDestino="C:\\Users\\Administrator\\Documents\\NetBeansProjects\\Proyecto_DWI\\src\\main\\webapp\\images\\Marcas";
+    private String rutaDestino="C:\\Users\\julio\\Documents\\NetBeansProjects\\Proyecto_DWI\\src\\main\\webapp\\images\\Marcas";
     private String rutaArchivo="../images/Marcas/";
     private File archivoDestino= new File(rutaDestino);
     private String[] extensiones ={".png",".jpg",".jpeg",".webp"};

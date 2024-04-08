@@ -30,7 +30,7 @@
         <div class="grid gap-3 sm:gap-0 sm:grid-cols-2">
             <div class=" flex flex-col space-y-3 text-center">
                 <h2 class="text-white text-4xl">Contáctanos</h2>
-                <p class="px-8 text-slate-300 text-xl">¿Tienes alguna pregunta? Estamos aquí para ayudarte. En Paragon, damos la mejor atención y asesoramiento sobre nuestros productos</p>
+                <p class="px-8 text-slate-300 text-xl">¿Tienes alguna pregunta? Estamos aquí para ayudarte. En Makacom, damos la mejor atención y asesoramiento sobre nuestros productos</p>
             </div>
             <div class="">
                 <form action="" class=" space-y-6">

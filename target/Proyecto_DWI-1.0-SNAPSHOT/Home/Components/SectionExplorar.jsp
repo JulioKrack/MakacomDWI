@@ -40,14 +40,6 @@
                         <jsp:param name="url" value="About.jsp"/>
                     </jsp:include>
                 </div>
-                <div class="col-span-2">
-                    <jsp:include page="SectionExplorarCard.jsp">
-                        <jsp:param name="titulo" value="Reseñas y Comentarios" />
-                        <jsp:param name="descripcion" value="Desde el exagerado hasta el crítico profesional, aquí encontrarás muchas opiniones" />
-                        <jsp:param name="imgurl" value="../images/Reseñas-Coment.webp"/>
-                        <jsp:param name="url" value="Testimonios.jsp"/>
-                    </jsp:include>
-                </div>
             </div>
             <jsp:include page="SectionExplorarCard.jsp">
                 <jsp:param name="titulo" value="Productos en Descuento" />

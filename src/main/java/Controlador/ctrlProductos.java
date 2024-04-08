@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 )
 public class ctrlProductos extends HttpServlet {
     private ProductosDAO pDAO=new ProductosDAO();
-    private String rutaAbsoluta ="C:\\Users\\Administrator\\Documents\\NetBeansProjects\\Proyecto_DWI\\src\\main\\webapp\\images\\Productos";
+    private String rutaAbsoluta ="C:\\Users\\julio\\Documents\\NetBeansProjects\\DWI-Proyecto_DWI\\src\\main\\webapp\\images\\Productos";
     private File archivoDestino=new File(rutaAbsoluta);
     private String rutaArchivo="../images/Productos/";
     private String[] extensiones ={".png",".jpg",".jpeg",".webp"};

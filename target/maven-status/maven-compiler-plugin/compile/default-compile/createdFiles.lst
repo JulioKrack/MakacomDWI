@@ -21,7 +21,6 @@ DAO\UsuariosDAO.class
 Controlador\ctrlCarrito.class
 Controlador\ctrlUsuarios.class
 Modelos\Carro.class
-DAO\ComentariosDAO.class
 Modelos\Venta.class
 DAO\MarcasDAO.class
 Modelos\Categoria.class
