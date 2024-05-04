@@ -1,66 +1,130 @@
 
 package Controlador;
-
-import java.io.IOException;
-import java.io.PrintWriter;
+import DAO.UsuariosDAO;
+import DAO.ProveedoresDAO;
+import Modelos.Usuario;
+import Modelos.Proveedor;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
-/**
- *
- * @author julio
- */
-@WebServlet(name = "ctrlProveedor", urlPatterns = {"/ctrlProveedor"})
+
 public class ctrlProveedor extends HttpServlet {
+    UsuariosDAO uDAO =new UsuariosDAO();
+    ProveedoresDAO pDAO =new ProveedoresDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
+        if (request.getParameter("InsertarProveedor")!= null) {
+            
+            String nombres=request.getParameter("nombresAdmin");
+            String apellidos=request.getParameter("apellidosAdmin");
+            String correo=request.getParameter("correoAdmin");
+            String contraseña=request.getParameter("contraAdmin");
+            
+            Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraseña), "administrador");
+            
+            if (u.ConAtributosVacios()) {
+                response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+            }
+            if (uDAO.Insertar(u)) {
+                response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+            }
+        }
+        
+        if (request.getParameter("ModificarAdmin")!=null) {
+            
+            String nombres=request.getParameter("nombresAdmin");
+            String apellidos=request.getParameter("apellidosAdmin");
+            String correo=request.getParameter("correoAdmin");
+            String contraNueva=request.getParameter("contraAdminNuevo");
+            String contraPrev=request.getParameter("contraPrev");
+            int id =Integer.parseInt(request.getParameter("idAdmin"));
+            
+            
+            if (contraNueva != "") {
+                
+                 Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraNueva), "administrador");
+                 u.setId(id);
+                 
+                if (u.ConAtributosVacios()) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+                }
+                if (uDAO.Modificar(u)) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+                }
+                
+            } else {
+                
+                Usuario u=new Usuario(nombres, apellidos, correo, contraPrev, "administrador");
+                u.setId(id);
+                
+                if (u.ConAtributosVacios()) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+                }
+                if (uDAO.Modificar(u)) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+                }
+            }
+            
+        }
+        
+        if (request.getParameter("EliminarProveedor")!=null) {
+            int id =Integer.parseInt(request.getParameter("idProveedor"));
+            if (uDAO.Eliminar(id)) {
+                response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
+            }
+        }
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
+    
+    private String codificarContraseña(String contra) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = md.digest(contra.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : bytes) {
+                String hex = Integer.toHexString(0xFF & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Error en la codificación de la contraseña: " + e);
+        }
+        return null;
+    }
 }

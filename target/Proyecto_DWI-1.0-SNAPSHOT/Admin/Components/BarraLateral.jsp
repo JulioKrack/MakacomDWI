@@ -20,9 +20,14 @@
             <li class=" w-full h-[80px] ">
                 <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Categorias/"><i class='bx bxs-category'></i> Categorías</a>
             </li>
+            <!-- comment 
             <li class=" w-full h-[80px] ">
                 <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Promociones/"><i class="fa-solid fa-gift"></i>Promociones</a>
             </li>
+            -->
+            <li class=" w-full h-[80px] ">
+                <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Proveedores/"><i class='bx bx-shield-quarter'></i> Proveedores</a>
+            </li>            
             <li class=" w-full h-[80px] ">
                 <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Clientes/"><i class="fa-regular fa-user"></i> Clientes</a>
             </li>
