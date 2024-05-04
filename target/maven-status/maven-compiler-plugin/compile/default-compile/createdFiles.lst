@@ -5,6 +5,7 @@ DAO\DetalleVentasDAO.class
 Modelos\Comentario.class
 Controlador\ctrlCarritoModal.class
 Modelos\Cliente.class
+Controlador\ctrlProveedor.class
 Controlador\ctrlMarcas.class
 Modelos\Marca.class
 DAO\Conexion.class
@@ -24,6 +25,7 @@ Modelos\Carro.class
 Modelos\Venta.class
 DAO\MarcasDAO.class
 Modelos\Categoria.class
+Modelos\Proveedor.class
 Controlador\ctrlGraficas.class
 Modelos\Venta_Detalle.class
 DAO\VentasDAO.class
