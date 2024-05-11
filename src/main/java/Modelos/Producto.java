@@ -29,6 +29,7 @@ public class Producto {
         this.Especificaciones = Especificaciones;
     }
     
+    
 
 
     public String getEspecificaciones() {

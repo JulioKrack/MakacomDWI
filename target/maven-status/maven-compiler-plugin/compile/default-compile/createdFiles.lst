@@ -8,6 +8,8 @@ Modelos\Cliente.class
 Controlador\ctrlProveedor.class
 Controlador\ctrlMarcas.class
 Modelos\Marca.class
+Controlador\ctrlCliente.class
+DAO\ProveedoresDAO.class
 DAO\Conexion.class
 DAO\ProductosDAO.class
 Utilidades\Funciones.class

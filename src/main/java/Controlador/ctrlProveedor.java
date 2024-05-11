@@ -1,5 +1,6 @@
 
 package Controlador;
+
 import DAO.UsuariosDAO;
 import DAO.ProveedoresDAO;
 import Modelos.Usuario;
@@ -12,8 +13,6 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
-
 public class ctrlProveedor extends HttpServlet {
     UsuariosDAO uDAO =new UsuariosDAO();
     ProveedoresDAO pDAO =new ProveedoresDAO();
@@ -23,8 +22,6 @@ public class ctrlProveedor extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
     }
-
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -127,4 +124,5 @@ public class ctrlProveedor extends HttpServlet {
         }
         return null;
     }
+
 }
