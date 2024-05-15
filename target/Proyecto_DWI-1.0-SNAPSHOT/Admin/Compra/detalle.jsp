@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="DAO.DetalleVentasDAO" %>
-<%@ page import="Modelos.Venta_Detalle" %>
+<%@ page import="DAO.DetalleComprasDAO" %>
+<%@ page import="Modelos.CompraDetalle" %>
 <%@ page import="Modelos.Usuario" %>
 <%
     Usuario u = (Usuario) session.getAttribute("usuario");
@@ -31,7 +31,7 @@
                                 <thead class="border-b bg-neutral-800 text-white">
                                     <tr>
                                         <th scope="col" class=" p-5">ID</th>
-                                        <th scope="col" class=" p-5">Venta</th>
+                                        <th scope="col" class=" p-5">Compra</th>
                                         <th scope="col" class=" p-5">Producto</th>
                                         <th scope="col" class=" p-5">Cantidad</th>
                                         <th scope="col" class=" p-5">Precio unitario</th>
@@ -48,7 +48,7 @@
                                         for (Venta_Detalle detalle : detalles) { %>
                                         <tr class="border-b hover-bg-black transform duration-200">
                                             <td class="p-2 truncate"><%= detalle.getId() %></td>
-                                            <td class="p-2 truncate max-w-[200px]"><%= detalle.getVenta() %></td>
+                                            <td class="p-2 truncate max-w-[200px]"><%= detalle.getCompra() %></td>
                                             <td class="p-2 truncate max-w-[200px]"><%= detalle.getProducto() %></td>
                                             <td class="p-2 truncate max-w-[200px]"><%= detalle.getCantidad() %></td>
                                             <td class="p-2 truncate max-w-[200px]">$/<%= detalle.getMonto_unit() %></td>

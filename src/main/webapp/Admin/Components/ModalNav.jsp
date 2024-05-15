@@ -30,6 +30,9 @@
                 <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2"href="<%=url %>/Admin/Ventas/"><i class="fa-regular fa-file"></i> Ventas</a>
             </li>
             <li class=" w-full ">
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2"href="<%=url %>/Admin/Compras/"><i class="fa-regular fa-file"></i> Compras</a>
+            </li>
+            <li class=" w-full ">
                 <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Admin/Administradores/"><i class='bx bx-shield-quarter'></i> Administradores</a>
             </li>
         </ul>

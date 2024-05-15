@@ -35,6 +35,9 @@
                 <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Ventas/"><i class="fa-regular fa-file"></i> Ventas</a>
             </li>
             <li class=" w-full h-[80px] ">
+                <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Compra/"><i class="fa-regular fa-file"></i> Compras</a>
+            </li>
+            <li class=" w-full h-[80px] ">
                 <a class="w-full h-full flex items-center justify-center text-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide p-2 gap-2" href="<%=url %>/Admin/Administradores/"><i class='bx bx-shield-quarter'></i> Administradores</a>
             </li>
         </ul>

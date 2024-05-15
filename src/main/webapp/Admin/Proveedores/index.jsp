@@ -12,7 +12,7 @@
 %>
 <% 
     ProveedoresDAO usuDAO = new ProveedoresDAO();
-    ArrayList<Proveedor> proveedor = usuDAO.ListarProveedores();
+    ArrayList<Proveedor> proveedor = usuDAO.ListarProveedor();
 
 %>
 <jsp:include page="../../Templates/Head.jsp"/> 
@@ -45,14 +45,14 @@
                                         <td colspan="9" class="p-5">No hay proveedores registrados</td>
                                     </tr>
                                  <% } else {
-                                        for (Proveedor clie : Proveedor) { %>
+                                        for (Proveedor clie : proveedor) { %>
                                         <tr class="border-b hover:bg-black transform duration-200">
                                             <td class="p-2 truncate"><%= clie.getId() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getNombres() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getApellidos() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getCorreo() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getContraseña() %></td>
-                                            <td class="p-2 truncate "><%= clie.getMarca() %></td>
+                                            <td class="p-2 truncate max-w-[140px]"><%= clie.getMarca() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getTelefono() %></td>
                                         </tr>
                                     <% }

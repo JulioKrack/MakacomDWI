@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="DAO.VentasDAO" %>
-<%@ page import="Modelos.Venta" %>
+<%@ page import="DAO.ComprasDAO" %>
+<%@ page import="Modelos.Compra" %>
 
 <%@ page import="Modelos.Usuario" %>
 <%
