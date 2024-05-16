@@ -82,7 +82,30 @@ public class ProveedoresDAO extends Conexion{
             }
         }
     }
-    
+        public boolean ModificarProveedor(Usuario u,Proveedor p){
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+        try {
+            ps = con.prepareStatement("UPDATE Proveedor SET marca=?, telefono=? WHERE proveedor_id=?");
+            ps.setString(1, p.getMarca());
+            ps.setString(2, p.getTelefono());
+            ps.setInt(3, u.getId());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e);
+            return false;
+            
+        } finally{
+            
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, "Error: "+ex);
+            }
+        }
+    }
+
     public boolean Eliminar(int id){
         PreparedStatement ps = null;
         Connection con = getConnection();
@@ -294,16 +317,15 @@ public class ProveedoresDAO extends Conexion{
         ResultSet rs=null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, u.contraseña, c.telefono, c.puntos\n" +
+             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, c.telefono, c.marca\n" +
                                         "FROM usuarios u\n" +
-                                        "INNER JOIN proveedor c ON u.id = c.usuario_id");
+                                        "INNER JOIN proveedor c ON u.id = c.proveedor_id");
              rs = ps.executeQuery();
                 while (rs.next()) {
                     c.setId(rs.getInt("id"));
                     c.setNombres(rs.getString("nombres"));
                     c.setApellidos(rs.getString("apellidos"));
                     c.setCorreo(rs.getString("email"));
-                    c.setContraseña(rs.getString("contraseña"));
                     c.setMarca(rs.getString("marca"));
                     c.setTelefono(rs.getString("telefono"));
                     

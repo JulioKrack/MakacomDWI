@@ -61,39 +61,23 @@ public class ctrlProveedor extends HttpServlet {
         
         if (request.getParameter("ModificarPro")!=null) {
             
-            String nombres=request.getParameter("nombresAdmin");
-            String apellidos=request.getParameter("apellidosAdmin");
-            String correo=request.getParameter("correoAdmin");
-            String contraNueva=request.getParameter("contraAdminNuevo");
-            String contraPrev=request.getParameter("contraPrev");
+            String nombres=request.getParameter("nombresPro");
+            String apellidos=request.getParameter("apellidosPro");
+            String correo=request.getParameter("correoPro");
+            String telefono=request.getParameter("telefonoPro");
+            String marca=request.getParameter("marcaPro");
             int id =Integer.parseInt(request.getParameter("idProveedor"));
             
+            Usuario u=new Usuario(nombres, apellidos, correo, null ,"proveedor");
+            u.setId(id);
+            Proveedor p=new Proveedor(marca,telefono,nombres, apellidos, correo, null ,"proveedor");
+            p.setId(id);
+
+            if (uDAO.Modificar(u)) {
+                if(pDAO.ModificarProveedor(u,p))
+                response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
             
-            if (contraNueva == "") {
-                
-                 Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraNueva), "administrador");
-                 u.setId(id);
-                 
-                if (u.ConAtributosVacios()) {
-                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
-                }
-                if (uDAO.Modificar(u)) {
-                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
-                }
-                
-            } else {
-                
-                Usuario u=new Usuario(nombres, apellidos, correo, contraPrev, "administrador");
-                u.setId(id);
-                
-                if (u.ConAtributosVacios()) {
-                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
-                }
-                if (uDAO.Modificar(u)) {
-                    response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
-                }
             }
-            
         }
         
         if (request.getParameter("EliminarProveedor")!=null) {
