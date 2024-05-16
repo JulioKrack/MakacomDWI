@@ -21,7 +21,7 @@
                 <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Categorias/"><i class='bx bxs-category'></i> Categorías</a>
             </li>
             <li class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Categorias/"><i class='bx bxs-category'></i> Proveedores</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Proveedores/"><i class='bx bxs-category'></i> Proveedores</a>
             </li>
             <li hidden class=" w-full">
                 <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Admin/Promociones/"><i class="fa-solid fa-gift"></i>Promociones</a>

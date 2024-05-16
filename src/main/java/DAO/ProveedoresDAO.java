@@ -45,8 +45,8 @@ public class ProveedoresDAO extends Conexion{
         try{        
             ps=con.prepareStatement("INSERT INTO Proveedor(proveedor_id,marca,telefono) VALUES(?,?,?)");
             ps.setInt(1, id);
-            ps.setString(2, u.getTelefono());
-            ps.setString(3, u.getMarca());
+            ps.setString(2, u.getMarca());
+            ps.setString(3, u.getTelefono());
             ps.execute();
             return true; 
         } catch (SQLException e) {
