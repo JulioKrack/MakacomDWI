@@ -39,14 +39,10 @@
                                 <label for="" class="text-white text-xl">Correo Electrónico</label>
                                 <input type="email" name="correoAdmin" required autocomplete="off" value="<%= u.getCorreo() %>" class="outline-none w-full border  p-2 bg-neutral-950">    
                             </div>
-                            <div class="flex flex-col space-y-2">
-                                <label for="" class="text-white text-xl">Nueva Contraseña</label>
-                                <input type="password" name="contraAdminNuevo" autocomplete="off"  class="outline-none border  p-2 bg-neutral-950">
-                            </div>
                             <div class="flex pt-7 items-center justify-between space-x-5">
                                 <input type="hidden" name="contraPrev" value="<%= u.getContraseña() %>">
-                                <input type="hidden" name="idAdmin" value="<%= u.getId() %>">
-                                <input type="submit" name="ModificarAdmin" value="Modificar Administrador" class="bg-white cursor-pointer text-xl text-black p-2 rounded-tl-lg rounded-br-lg hover:bg-cyan-300 transform duration-200 mt-3">
+                                <input type="hidden" name="idProveedor" value="<%= u.getId() %>">
+                                <input type="submit" name="ModificarProveedor" value="Modificar Proveedor" class="bg-white cursor-pointer text-xl text-black p-2 rounded-tl-lg rounded-br-lg hover:bg-cyan-300 transform duration-200 mt-3">
                             </div>
                         </div>
                     </form>

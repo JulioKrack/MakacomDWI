@@ -37,34 +37,39 @@ public class ctrlProveedor extends HttpServlet {
         processRequest(request, response);
         
         
-        if (request.getParameter("InsertarProveedor")!= null) {
+        if (request.getParameter("InsertarPro")!= null) {
             
-            String nombres=request.getParameter("nombresAdmin");
-            String apellidos=request.getParameter("apellidosAdmin");
-            String correo=request.getParameter("correoAdmin");
-            String contraseña=request.getParameter("contraAdmin");
+            String nombres=request.getParameter("nombresPro");
+            String apellidos=request.getParameter("apellidosPro");
+            String correo=request.getParameter("correoPro");
+            String contra="123";
+            String marca=request.getParameter("marcaPro");
+            String telefono=request.getParameter("telefonoPro");
             
-            Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraseña), "administrador");
-            
-            if (u.ConAtributosVacios()) {
-                response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
+            Usuario u=new Usuario(nombres, apellidos, correo, contra, "proveedor");
+
+            if (pDAO.Insertar(u)) {
+                int id=pDAO.ObtenerIDgenerado();
+                    Proveedor p=new Proveedor(marca,telefono,nombres,apellidos,correo,contra,"proveedor");
+                    if (pDAO.InsertarProveedor(p, id)) {
+                        response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
+                   
+                }
             }
-            if (uDAO.Insertar(u)) {
-                response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
-            }
+            
         }
         
-        if (request.getParameter("ModificarAdmin")!=null) {
+        if (request.getParameter("ModificarPro")!=null) {
             
             String nombres=request.getParameter("nombresAdmin");
             String apellidos=request.getParameter("apellidosAdmin");
             String correo=request.getParameter("correoAdmin");
             String contraNueva=request.getParameter("contraAdminNuevo");
             String contraPrev=request.getParameter("contraPrev");
-            int id =Integer.parseInt(request.getParameter("idAdmin"));
+            int id =Integer.parseInt(request.getParameter("idProveedor"));
             
             
-            if (contraNueva != "") {
+            if (contraNueva == "") {
                 
                  Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraNueva), "administrador");
                  u.setId(id);
