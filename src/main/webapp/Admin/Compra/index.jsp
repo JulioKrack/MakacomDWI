@@ -11,8 +11,8 @@
     } 
 %>
 <% 
-    VentasDAO vDAO = new VentasDAO();
-    ArrayList<Venta> ventas = vDAO.Listar();
+    ComprasDAO cDAO = new ComprasDAO();
+    ArrayList<Compra> compras = cDAO.Listar();
 %>
 <jsp:include page="../../Templates/Head.jsp"/> 
     <jsp:include page="../Components/NavAdmin.jsp"/>  
@@ -22,6 +22,7 @@
             <div class="relative h-full w-full bg-[rgb(20,20,20)] flex flex-col p-5 gap-10">
                 <div class="flex items-center justify-start">
                     <h2 class="text-5xl text-white">Compras </h2>
+                    <button class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalPro" data-te-ripple-init>Crear Orden de Compra</button>    
                 </div>
                 <div class="w-full relative flex justify-center">
                     <div class="flex relative w-full overflow-x-auto scrollbar-thin scrollbar-track-black scrollbar-thumb-orange-600">
@@ -35,31 +36,31 @@
                                         <th scope="col" class=" p-5">hora</th>
                                         <th scope="col" class=" p-5">Monto Pagado</th>
                                         <th scope="col" class=" p-5">Descuento Aplicado</th>
-                                        <th scope="col" class=" p-5">Cliente</th>
-                                        <th scope="col" class=" p-5">Membresía</th>
+                                        <th scope="col" class=" p-5">Proveedor</th>
+                                        <th hidden scope="col" class=" p-5">Membresía</th>
                                         <th scope="col" class=" p-5">Método de Pago</th>
-                                        <th scope="col" class=" p-5">Detalle</th>
+                                        <th hidden scope="col" class=" p-5">Detalle</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
-                                <%  if (ventas == null || ventas.isEmpty()) {  %>
+                                <%  if (compras == null || compras.isEmpty()) {  %>
                                     <tr>
-                                        <td colspan="9" class="p-5">No se registraron ventas</td>
+                                        <td colspan="9" class="p-5">No se registraron compras</td>
                                     </tr>
                                  <% } else { %>
-                                     <% for (Venta venta : ventas) { %>
+                                     <% for (Compra compra : compras) { %>
                                         <tr class="border-b hover:bg-black transform duration-200">
-                                            <td class="px-2 truncate"><%= venta.getId() %></td>
-                                            <td class="px-2 truncate"><%= venta.getTransaccion() %></td>
-                                            <td class="px-2 truncate max-w-[200px]"><%= venta.getFecha() %></td>
-                                            <td class="px-2 truncate max-w-[200px]"><%= venta.getHora() %></td>
-                                            <td class="px-2 truncate max-w-[200px]">$/<%= venta.getMonto() %></td>
-                                            <td class="px-2 truncate max-w-[200px]">$/<%= venta.getDescuento() %></td>
-                                            <td class="px-2 truncate max-w-[200px]"><%= venta.getNombreCliente() %></td>
-                                            <td class="px-2 truncate max-w-[200px]"><%= venta.getIdcliente() %></td>
-                                            <td class="px-2 truncate max-w-[200px]"><%= venta.getMetodo() %></td>
-                                            <td class="flex flex-col gap-2 p-2">
-                                                <a href="detalle.jsp?id=<%= venta.getId() %>" class="bg-white text-black px-2 py-1 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md">Ver Detalle</a>
+                                            <td class="px-2 truncate"><%= compra.getId() %></td>
+                                            <td class="px-2 truncate"><%= compra.getTransaccion() %></td>
+                                            <td class="px-2 truncate max-w-[200px]"><%= compra.getFecha() %></td>
+                                            <td class="px-2 truncate max-w-[200px]"><%= compra.getHora() %></td>
+                                            <td class="px-2 truncate max-w-[200px]">$/<%= compra.getMonto() %></td>
+                                            <td class="px-2 truncate max-w-[200px]">$/<%= compra.getDescuento() %></td>
+                                            <td class="px-2 truncate max-w-[200px]"><%= compra.getNombreProveedor() %></td>
+                                            <td hidden class="px-2 truncate max-w-[200px]"><%= compra.getIdproveedor() %></td>
+                                            <td class="px-2 truncate max-w-[200px]"><%= compra.getMetodo() %></td>
+                                            <td hidden class="flex flex-col gap-2 p-2">
+                                                <a href="detalle.jsp?id=<%= compra.getId() %>" class="bg-white text-black px-2 py-1 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md">Ver Detalle</a>
                                             </td>
                                         </tr>
                                     <% } %>
@@ -72,5 +73,57 @@
             </div>
         </section> 
     </main>
+    <div data-te-modal-init class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="ModalPro" tabindex="-1" aria-labelledby="ModalPro" aria-hidden="true">
+        <div data-te-modal-dialog-ref class="relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[0px]:m-0 min-[0px]:h-full min-[0px]:max-w-none">
+            <div class="relative flex w-full flex-col bg-black outline-none min-[0px]:h-full">
+                <div class="flex flex-shrink-0 items-center justify-between border-b-2 border-[rgb(255,100,0)] p-5 text-4xl text-white">
+                    <h5>Orden de Compra </h5>
+                    <button type="button" class="hover:text-[rgb(255,100,0)] rotate-45 transform duration-300 hover:-rotate-45" data-te-modal-dismiss ><i class='bx bx-cross'></i></i></button>
+                </div>
+                <div class="relative p-5 min-[0px]:overflow-y-auto flex justify-center">
+                    <form action="../../ctrlCompra" method="POST" class="text-white  w-[500px] text-xl flex flex-col gap-3" autocomplete="off">
+                        <div class="flex flex-col space-y-5 p-6">
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Transacción</label>
+                                <input type="text" name="transaccionCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Fecha</label>
+                                <input type="text" name="fechaCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Hora</label>
+                                <input type="text" name="horaCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Monto</label>
+                                <input type="text" name="montoCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Descuento</label>
+                                <input type="text" name="descuentoCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Nombre del Proveedor</label>
+                                <input type="text" name="nombreProveedorCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">ID del Proveedor</label>
+                                <input type="text" name="idProveedorCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Método de Pago</label>
+                                <input type="text" name="metodoCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex pt-7 items-center justify-between space-x-5">
+                                <input type="submit" name="InsertarCompra" autocomplete="off" value="Crear Compra" class="bg-white cursor-pointer text-xl text-black p-2 rounded-tl-lg rounded-br-lg hover:bg-cyan-300 transform duration-200 mt-3">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>           
     <jsp:include page="../Components/ModalNav.jsp"/>
 <jsp:include page="../../Templates/Footer.jsp"/> 

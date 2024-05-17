@@ -28,7 +28,7 @@
                 <div class="w-full relative flex justify-center">
                     <div class="flex relative w-full overflow-x-auto scrollbar-thin scrollbar-track-black scrollbar-thumb-orange-600">
                         <div class="relative w-full">
-                            <table class="w-full text-center max-sm:text-xs sm:text-base">
+                            <table class="w-full text-center max-sm:text-xs sm:text-base " id="myTable">
                                 <thead class="border-b bg-neutral-800 text-white">
                                     <tr>
                                         <th scope="col" class=" p-5">ID</th>
@@ -48,7 +48,7 @@
                                     </tr>
                                  <% } else {
                                         for (Proveedor clie : proveedor) { %>
-                                        <tr class="border-b hover:bg-black transform duration-200">
+                                        <tr class="border-b hover:bg-black transform duration-200" >
                                             <td class="p-2 truncate"><%= clie.getId() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getNombres() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getApellidos() %></td>
@@ -115,6 +115,14 @@
                 </div>
             </div>
         </div>
-    </div>                                    
+    </div>   
+    
+                                    
+    <script>
+        const dataTable = new simpleDatatables.DataTable("#myTable", {
+                searchable: true,
+                
+        })
+    </script>
 <jsp:include page="../Components/ModalNav.jsp"/>    
 <jsp:include page="../../Templates/Footer.jsp"/> 

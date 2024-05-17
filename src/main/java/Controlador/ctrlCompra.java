@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controlador;
-import DAO.UsuariosDAO;
-import DAO.ProveedoresDAO;
+import DAO.ComprasDAO;
+import DAO.DetalleComprasDAO;
+import Modelos.Compra;
 import Modelos.Usuario;
 import Modelos.Proveedor;
 import jakarta.servlet.ServletException;
@@ -16,47 +17,55 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class ctrlCompra extends HttpServlet {
-
+    ComprasDAO uDAO =new ComprasDAO();
+    DetalleComprasDAO pDAO =new DetalleComprasDAO();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+            if (request.getParameter("InsertarCompra")!= null) {
+
+
+            String transaccion = request.getParameter("transaccionCompra");
+            String fecha = request.getParameter("fechaCompra");
+            String hora = request.getParameter("horaCompra");
+            String montoString = request.getParameter("montoCompra");
+            String descuentoString = request.getParameter("descuentoCompra");
+            String nombreProveedor = request.getParameter("nombreProveedorCompra");
+            String idProveedorString = request.getParameter("idProveedorCompra");
+            String metodo = request.getParameter("metodoCompra");
+
+            // Convertir los valores que son números a los tipos adecuados
+            int id = 1;
+            double monto = Double.parseDouble(montoString);
+            double descuento = Double.parseDouble(descuentoString);
+            int idProveedor = Integer.parseInt(idProveedorString);
+
+            // Crear una instancia de Compra con los valores obtenidos
+            Compra c = new Compra(id, transaccion, fecha, hora, monto, descuento, nombreProveedor, null, null, idProveedor, metodo);
+
+
+            if (uDAO.Insertar(c)) {
+                response.sendRedirect(request.getContextPath() + "/Admin/Compra/");
+            }
+            
+            
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";

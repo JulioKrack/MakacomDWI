@@ -10,13 +10,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author julio
- */
+
 public class ComprasDAO extends Conexion{
     
-    public boolean Insertar(Compra v) {
+    public boolean Insertar(Compra v    ) {
         Connection con = getConnection();
         PreparedStatement ps = null;
 
@@ -28,14 +25,10 @@ public class ComprasDAO extends Conexion{
             ps.setDouble(4, v.getMonto());
             ps.setDouble(5, v.getDescuento());
             ps.setString(6, v.getNombreProveedor());
-            ps.setString(7, v.getCorreoProveedor());
-            ps.setString(8, v.getTelefonoProveedor());
+            ps.setString(7, "prueba@prueba.com");
+            ps.setString(8, "31231231");
+            ps.setInt(9, 9);
 
-            if (v.getIdproveedor() > 0) {
-                ps.setInt(9, v.getIdproveedor());
-            } else {
-                ps.setNull(9, java.sql.Types.INTEGER);
-            }
             ps.setString(10, v.getMetodo());
             System.out.println(ps.toString());
             ps.execute();
@@ -64,12 +57,12 @@ public class ComprasDAO extends Conexion{
     
     
     public ArrayList<Compra> Listar() {
-        ArrayList<Compra> ventasList = new ArrayList<>();
+        ArrayList<Compra> comprasList = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs=null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement("SELECT * FROM Compras");
+             ps = con.prepareStatement("SELECT * FROM compras");
              rs = ps.executeQuery();
                 while (rs.next()) {
                     Compra v = new Compra();
@@ -79,25 +72,25 @@ public class ComprasDAO extends Conexion{
                     v.setHora(rs.getString("hora"));
                     v.setMonto(rs.getDouble("monto"));
                     v.setDescuento(rs.getDouble("descuento_total"));
-                    v.setNombreProveedor(rs.getString("cliente_nom"));
-                    v.setCorreoProveedor(rs.getString("cliente_correo"));
-                    v.setTelefonoProveedor(rs.getString("cliente_telefono"));
-                    v.setIdproveedor(rs.getInt("cliente_id"));
+                    v.setNombreProveedor(rs.getString("proveedor_nombre"));
+                    v.setCorreoProveedor(rs.getString("proveedor_correo"));
+                    v.setTelefonoProveedor(rs.getString("proveedor_telefono"));
+                    v.setIdproveedor(rs.getInt("proveedor_id"));
                     v.setMetodo(rs.getString("metodo_pago"));
-                    ventasList.add(v);
+                    comprasList.add(v);
                 }
-             return ventasList;
+             return comprasList;
              
         } catch (SQLException e) {
             
             Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e); 
-            return ventasList;
+            return comprasList;
             
         } 
     }
     
     
-    public Compra ObtenerVenta(int id) {
+    public Compra ObtenerCompra(int id) {
         Compra v=new Compra();
         PreparedStatement ps = null;
         ResultSet rs=null;

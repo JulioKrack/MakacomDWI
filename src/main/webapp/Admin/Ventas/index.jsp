@@ -36,9 +36,9 @@
                                         <th scope="col" class=" p-5">Monto Pagado</th>
                                         <th scope="col" class=" p-5">Descuento Aplicado</th>
                                         <th scope="col" class=" p-5">Cliente</th>
-                                        <th scope="col" class=" p-5">Membresía</th>
+                                        <th hidden scope="col" class=" p-5">Membresía</th>
                                         <th scope="col" class=" p-5">Método de Pago</th>
-                                        <th scope="col" class=" p-5">Detalle</th>
+                                        <th hidden scope="col" class=" p-5">Detalle</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
@@ -57,8 +57,8 @@
                                             <td class="px-2 truncate max-w-[200px]">$/<%= venta.getDescuento() %></td>
                                             <td class="px-2 truncate max-w-[200px]"><%= venta.getNombreCliente() %></td>
                                             <td class="px-2 truncate max-w-[200px]"><%= venta.getIdcliente() %></td>
-                                            <td class="px-2 truncate max-w-[200px]"><%= venta.getMetodo() %></td>
-                                            <td class="flex flex-col gap-2 p-2">
+                                            <td hidden class="px-2 truncate max-w-[200px]"><%= venta.getMetodo() %></td>
+                                            <td hidden class="flex flex-col gap-2 p-2">
                                                 <a href="detalle.jsp?id=<%= venta.getId() %>" class="bg-white text-black px-2 py-1 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md">Ver Detalle</a>
                                             </td>
                                         </tr>

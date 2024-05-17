@@ -14,5 +14,8 @@
         <script src="https://kit.fontawesome.com/b9be81e77a.js" crossorigin="anonymous"></script>
         <script src="https://www.paypal.com/sdk/js?client-id=AU5iFYVUmmYyeOoGo2Qo_ULpPS6tK9-DJ228lB2sC6CzG697tiW07aUGh2vxmbaL6idw6udHNvm3N0Ev&currency=USD&locale=en_US&disable-funding=paylater"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      </head>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+        
+  </head>
     <body class="bg-black ">
