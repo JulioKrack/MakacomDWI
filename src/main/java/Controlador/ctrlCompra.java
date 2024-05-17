@@ -53,7 +53,7 @@ public class ctrlCompra extends HttpServlet {
             int cantidadpro = Integer.parseInt(cantidad);
 
             // Crear una instancia de Compra con los valores obtenidos
-            Compra c = new Compra(id, transaccion, fecha, hora, monto, nombreProveedor, metodo,cantidadpro,producto);
+            Compra c = new Compra(id, transaccion, fecha, hora, monto, nombreProveedor, producto,cantidadpro,metodo);
 
 
             if (uDAO.Insertar(c)) {
