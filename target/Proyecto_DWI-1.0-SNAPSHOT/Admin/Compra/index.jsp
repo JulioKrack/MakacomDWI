@@ -35,11 +35,11 @@
                                         <th scope="col" class=" p-5">fecha</th>
                                         <th scope="col" class=" p-5">hora</th>
                                         <th scope="col" class=" p-5">Monto Pagado</th>
-                                        <th scope="col" class=" p-5">Descuento Aplicado</th>
                                         <th scope="col" class=" p-5">Proveedor</th>
-                                        <th hidden scope="col" class=" p-5">Membresía</th>
                                         <th scope="col" class=" p-5">Método de Pago</th>
-                                        <th hidden scope="col" class=" p-5">Detalle</th>
+                                        <th scope="col" class=" p-5">Producto</th>
+                                        <th scope="col" class=" p-5">Cantidad</th>
+ 
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
@@ -55,13 +55,11 @@
                                             <td class="px-2 truncate max-w-[200px]"><%= compra.getFecha() %></td>
                                             <td class="px-2 truncate max-w-[200px]"><%= compra.getHora() %></td>
                                             <td class="px-2 truncate max-w-[200px]">$/<%= compra.getMonto() %></td>
-                                            <td class="px-2 truncate max-w-[200px]">$/<%= compra.getDescuento() %></td>
                                             <td class="px-2 truncate max-w-[200px]"><%= compra.getNombreProveedor() %></td>
-                                            <td hidden class="px-2 truncate max-w-[200px]"><%= compra.getIdproveedor() %></td>
                                             <td class="px-2 truncate max-w-[200px]"><%= compra.getMetodo() %></td>
-                                            <td hidden class="flex flex-col gap-2 p-2">
-                                                <a href="detalle.jsp?id=<%= compra.getId() %>" class="bg-white text-black px-2 py-1 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md">Ver Detalle</a>
-                                            </td>
+                                            <td class="px-2 truncate max-w-[200px]"><%= compra.getProducto() %></td>
+                                            <td class="px-2 truncate max-w-[200px]"><%= compra.getCantidad() %></td>                                            
+
                                         </tr>
                                     <% } %>
                                 <% } %>
@@ -100,20 +98,20 @@
                                 <input type="text" name="montoCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
                             </div>
                             <div class="flex flex-col space-y-2">
-                                <label for="" class="text-white text-xl">Descuento</label>
-                                <input type="text" name="descuentoCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
-                            </div>
-                            <div class="flex flex-col space-y-2">
                                 <label for="" class="text-white text-xl">Nombre del Proveedor</label>
                                 <input type="text" name="nombreProveedorCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
                             </div>
                             <div class="flex flex-col space-y-2">
-                                <label for="" class="text-white text-xl">ID del Proveedor</label>
-                                <input type="text" name="idProveedorCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
-                            </div>
-                            <div class="flex flex-col space-y-2">
                                 <label for="" class="text-white text-xl">Método de Pago</label>
                                 <input type="text" name="metodoCompra" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Producto</label>
+                                <input type="text" name="producto" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="" class="text-white text-xl">Cantidad</label>
+                                <input type="text" name="cantidad" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
                             </div>
                             <div class="flex pt-7 items-center justify-between space-x-5">
                                 <input type="submit" name="InsertarCompra" autocomplete="off" value="Crear Compra" class="bg-white cursor-pointer text-xl text-black p-2 rounded-tl-lg rounded-br-lg hover:bg-cyan-300 transform duration-200 mt-3">

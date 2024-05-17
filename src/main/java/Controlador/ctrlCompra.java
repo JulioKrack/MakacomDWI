@@ -34,7 +34,7 @@ public class ctrlCompra extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            processRequest(request, response);
             if (request.getParameter("InsertarCompra")!= null) {
 
 
@@ -42,19 +42,18 @@ public class ctrlCompra extends HttpServlet {
             String fecha = request.getParameter("fechaCompra");
             String hora = request.getParameter("horaCompra");
             String montoString = request.getParameter("montoCompra");
-            String descuentoString = request.getParameter("descuentoCompra");
             String nombreProveedor = request.getParameter("nombreProveedorCompra");
-            String idProveedorString = request.getParameter("idProveedorCompra");
             String metodo = request.getParameter("metodoCompra");
+            String producto = request.getParameter("producto");
+            String cantidad = request.getParameter("cantidad");
 
             // Convertir los valores que son números a los tipos adecuados
             int id = 1;
             double monto = Double.parseDouble(montoString);
-            double descuento = Double.parseDouble(descuentoString);
-            int idProveedor = Integer.parseInt(idProveedorString);
+            int cantidadpro = Integer.parseInt(cantidad);
 
             // Crear una instancia de Compra con los valores obtenidos
-            Compra c = new Compra(id, transaccion, fecha, hora, monto, descuento, nombreProveedor, null, null, idProveedor, metodo);
+            Compra c = new Compra(id, transaccion, fecha, hora, monto, nombreProveedor, metodo,cantidadpro,producto);
 
 
             if (uDAO.Insertar(c)) {

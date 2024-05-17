@@ -7,27 +7,23 @@ public class Compra {
     private String fecha;
     private String hora;
     private double monto;
-    private double descuento;
     private String nombreProveedor;
-    private String correoProveedor;
-    private String telefonoProveedor;
-    private int idproveedor;
+    private String producto;
+    private int cantidad;
     private  String metodo;
 
     public Compra() {
     }
 
-    public Compra(int id, String transaccion, String fecha, String hora, double monto, double descuento, String nombreProveedor, String correoProveedor, String telefonoProveedor, int idproveedor, String metodo) {
+    public Compra(int id, String transaccion, String fecha, String hora, double monto, String nombreProveedor, String producto, int cantidad, String metodo) {
         this.id = id;
         this.transaccion = transaccion;
         this.fecha = fecha;
         this.hora = hora;
         this.monto = monto;
-        this.descuento = descuento;
         this.nombreProveedor = nombreProveedor;
-        this.correoProveedor = correoProveedor;
-        this.telefonoProveedor = telefonoProveedor;
-        this.idproveedor = idproveedor;
+        this.producto = producto;
+        this.cantidad = cantidad;
         this.metodo = metodo;
     }
 
@@ -71,14 +67,6 @@ public class Compra {
         this.monto = monto;
     }
 
-    public double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
-    }
-
     public String getNombreProveedor() {
         return nombreProveedor;
     }
@@ -87,28 +75,20 @@ public class Compra {
         this.nombreProveedor = nombreProveedor;
     }
 
-    public String getCorreoProveedor() {
-        return correoProveedor;
+    public String getProducto() {
+        return producto;
     }
 
-    public void setCorreoProveedor(String correoProveedor) {
-        this.correoProveedor = correoProveedor;
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
-    public String getTelefonoProveedor() {
-        return telefonoProveedor;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setTelefonoProveedor(String telefonoProveedor) {
-        this.telefonoProveedor = telefonoProveedor;
-    }
-
-    public int getIdproveedor() {
-        return idproveedor;
-    }
-
-    public void setIdproveedor(int idproveedor) {
-        this.idproveedor = idproveedor;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public String getMetodo() {
@@ -119,6 +99,7 @@ public class Compra {
         this.metodo = metodo;
     }
 
+    
     
     
 }
