@@ -142,6 +142,40 @@ public class UsuariosDAO extends Conexion{
         }
     }
     
+    public ArrayList<Usuario> ListarEmpleados() {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs=null;
+        Connection con = getConnection();
+        try {
+             ps = con.prepareStatement("SELECT * FROM Usuarios WHERE rol='empleado'");
+             rs = ps.executeQuery();
+                while (rs.next()) {
+                    Usuario u = new Usuario();
+                    u.setId(rs.getInt("id"));
+                    u.setNombres(rs.getString("nombres"));
+                    u.setApellidos(rs.getString("apellidos"));
+                    u.setCorreo(rs.getString("email"));
+                    u.setContraseña(rs.getString("contraseña"));
+                    u.setRol(rs.getString("rol"));
+                    usuarios.add(u);
+                }
+             return usuarios;
+             
+        } catch (SQLException e) {
+            
+            Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e); 
+            return usuarios;
+            
+        } finally{     
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, "Error: "+ex);
+            }
+        }
+    }
+    
     
     public ArrayList<Cliente> ListarClientes() {
         ArrayList<Cliente> clientes = new ArrayList<>();

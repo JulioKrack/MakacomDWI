@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="max-md:hidden md:flex">
-        <% if (u != null && u.getRol().equals("administrador")) { %>
+        <% if (u != null && u.getRol().equals("trabajador")) { %>
             <span class="text-white text-2xl px-10"><%=u.getNombres() +" "+ u.getApellidos() %></span>
         <% } %> 
         </div>
