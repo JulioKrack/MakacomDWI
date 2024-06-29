@@ -13,10 +13,10 @@ public class Usuario {
     private int visita;
 
     public Usuario() {
+        
     }
-
-    public Usuario(int id, String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
-        this.id = id;
+    
+    public Usuario(String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;

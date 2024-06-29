@@ -45,7 +45,7 @@ public class ctrlUsuarios extends HttpServlet {
             String correo=request.getParameter("correoAdmin");
             String contraseña=request.getParameter("contraAdmin");
             
-            Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraseña), "administrador");
+            Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraseña), "administrador",0);
             
             if (u.ConAtributosVacios()) {
                 response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");
@@ -63,11 +63,12 @@ public class ctrlUsuarios extends HttpServlet {
             String contraNueva=request.getParameter("contraAdminNuevo");
             String contraPrev=request.getParameter("contraPrev");
             int id =Integer.parseInt(request.getParameter("idAdmin"));
+            int visita=Integer.parseInt(request.getParameter("visita"));
             
             
             if (contraNueva != "") {
                 
-                 Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraNueva), "administrador");
+                 Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraNueva), "administrador",visita);
                  u.setId(id);
                  
                 if (u.ConAtributosVacios()) {
@@ -79,7 +80,7 @@ public class ctrlUsuarios extends HttpServlet {
                 
             } else {
                 
-                Usuario u=new Usuario(nombres, apellidos, correo, contraPrev, "administrador");
+                Usuario u=new Usuario(nombres, apellidos, correo, contraPrev, "administrador",visita);
                 u.setId(id);
                 
                 if (u.ConAtributosVacios()) {

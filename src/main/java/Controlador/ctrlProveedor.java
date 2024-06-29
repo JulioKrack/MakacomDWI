@@ -45,12 +45,13 @@ public class ctrlProveedor extends HttpServlet {
             String contra="123";
             String marca=request.getParameter("marcaPro");
             String telefono=request.getParameter("telefonoPro");
+            int vis=0;
             
-            Usuario u=new Usuario(nombres, apellidos, correo, contra, "proveedor");
+            Usuario u=new Usuario(nombres, apellidos, correo, contra, "proveedor", vis );
 
             if (pDAO.Insertar(u)) {
                 int id=pDAO.ObtenerIDgenerado();
-                    Proveedor p=new Proveedor(marca,telefono,nombres,apellidos,correo,contra,"proveedor");
+                    Proveedor p=new Proveedor(marca,telefono,nombres, apellidos, correo, null ,"proveedor",0);
                     if (pDAO.InsertarProveedor(p, id)) {
                         response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
                    
@@ -68,9 +69,10 @@ public class ctrlProveedor extends HttpServlet {
             String marca=request.getParameter("marcaPro");
             int id =Integer.parseInt(request.getParameter("idProveedor"));
             
-            Usuario u=new Usuario(nombres, apellidos, correo, null ,"proveedor");
+            Usuario u=new Usuario(nombres, apellidos, correo, null ,"proveedor",1);
             u.setId(id);
-            Proveedor p=new Proveedor(marca,telefono,nombres, apellidos, correo, null ,"proveedor");
+            Proveedor p=new Proveedor(marca,telefono,nombres, apellidos, correo, null ,"proveedor",1);
+            
             p.setId(id);
 
             if (uDAO.Modificar(u)) {

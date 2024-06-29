@@ -38,8 +38,9 @@ public class ctrlRegister extends HttpServlet {
         String correo = request.getParameter("correoRegister");
         String numero = request.getParameter("numeroRegister");
         String contra = codificarContraseña(request.getParameter("contraRegister"));
+        int visita = 0;
 
-        Usuario u=new Usuario(nombres, apellidos, correo, contra, "cliente");
+        Usuario u=new Usuario(nombres, apellidos, correo, contra, "cliente", visita);
 
         if (u.ConAtributosVacios()) {
             session.setAttribute("errorRegister", "No debe dejar campos vacíos");
@@ -58,7 +59,7 @@ public class ctrlRegister extends HttpServlet {
             if (uDAO.Insertar(u)) {
                 int id=uDAO.ObtenerIDgenerado();
                 if (id>0) {
-                    Cliente c=new Cliente(0, numero, nombres, apellidos, correo, contra, "cliente");
+                    Cliente c=new Cliente(0, numero, nombres, apellidos, correo, contra, "cliente", visita);
                     if (uDAO.InsertarCliente(c, id)) {
                         session.setAttribute("errorRegister", "");
                         response.sendRedirect(request.getContextPath() + "/Home/Login.jsp");

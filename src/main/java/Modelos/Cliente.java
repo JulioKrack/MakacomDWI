@@ -9,11 +9,15 @@ public class Cliente extends Usuario {
         
     }
 
-    public Cliente(int puntos, String telefono, String nombres, String apellidos, String correo, String contraseña, String rol) {
-        super(nombres, apellidos, correo, contraseña, rol);
+
+
+    public Cliente(int puntos, String telefono, String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
+        super( nombres, apellidos, correo, contraseña, rol, visita);
         this.puntos = puntos;
         this.telefono = telefono;
     }
+
+
 
     
 

@@ -7,16 +7,15 @@ public class Proveedor extends Usuario {
     public Proveedor() {
     }
 
-    public Proveedor(String marca, String telefono) {
+    public Proveedor(String marca, String telefono, String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
+        super(nombres, apellidos, correo, contraseña, rol, visita);
         this.marca = marca;
         this.telefono = telefono;
     }
 
-    public Proveedor(String marca, String telefono, String nombres, String apellidos, String correo, String contraseña, String rol) {
-        super(nombres, apellidos, correo, contraseña, rol);
-        this.marca = marca;
-        this.telefono = telefono;
-    }
+    
+
+
 
     public String getMarca() {
         return marca;

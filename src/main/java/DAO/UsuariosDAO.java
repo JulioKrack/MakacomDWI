@@ -19,12 +19,13 @@ public class UsuariosDAO extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConnection();
         try{
-            ps = con.prepareStatement("INSERT INTO Usuarios(nombres, apellidos, email, contraseña, rol) VALUES(?,?,?,?,?)");
+            ps = con.prepareStatement("INSERT INTO Usuarios(nombres, apellidos, email, contraseña, rol,visita) VALUES(?,?,?,?,?,?)");
             ps.setString(1, u.getNombres());
             ps.setString(2, u.getApellidos());
             ps.setString(3, u.getCorreo());
             ps.setString(4, u.getContraseña());
             ps.setString(5, u.getRol());
+            ps.setInt(6,u.getVisita());
             ps.execute();
             return true; 
         } catch (SQLException e) {
