@@ -50,6 +50,8 @@ public class ctrlLogin extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Home/index.jsp");
             } else if ("administrador".equals(u.getRol())) {
                 response.sendRedirect(request.getContextPath() + "/Admin/index.jsp");
+            } else if ("trabajador".equals(u.getRol())) {
+                response.sendRedirect(request.getContextPath() + "/Empleado/index.jsp");
             }
         }
     }   

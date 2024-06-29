@@ -44,8 +44,9 @@ public class ctrlUsuarios extends HttpServlet {
             String apellidos=request.getParameter("apellidosAdmin");
             String correo=request.getParameter("correoAdmin");
             String contraseña=request.getParameter("contraAdmin");
+            String rol=request.getParameter("rolAdmin");
             
-            Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraseña), "administrador",0);
+            Usuario u=new Usuario(nombres, apellidos, correo, codificarContraseña(contraseña), rol,0);
             
             if (u.ConAtributosVacios()) {
                 response.sendRedirect(request.getContextPath() + "/Admin/Administradores/");

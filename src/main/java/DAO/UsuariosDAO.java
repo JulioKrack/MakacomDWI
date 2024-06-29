@@ -150,7 +150,7 @@ public class UsuariosDAO extends Conexion{
         ResultSet rs=null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement("SELECT * FROM Usuarios WHERE rol='empleado'");
+             ps = con.prepareStatement("SELECT * FROM Usuarios WHERE rol='trabajador'");
              rs = ps.executeQuery();
                 while (rs.next()) {
                     Usuario u = new Usuario();
@@ -160,6 +160,7 @@ public class UsuariosDAO extends Conexion{
                     u.setCorreo(rs.getString("email"));
                     u.setContraseña(rs.getString("contraseña"));
                     u.setRol(rs.getString("rol"));
+                    u.setVisita(rs.getInt("visita"));
                     usuarios.add(u);
                 }
              return usuarios;

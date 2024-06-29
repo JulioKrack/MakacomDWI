@@ -12,7 +12,7 @@
 
 <% 
     UsuariosDAO usuDAO = new UsuariosDAO();
-    ArrayList<Usuario> usuarios = usuDAO.ListarAdministradores();
+    ArrayList<Usuario> usuarios = usuDAO.ListarEmpleados();
 
 %>
 <jsp:include page="../../Templates/Head.jsp"/> 
@@ -22,7 +22,7 @@
         <section class="w-full max-sm:overflow-x-hidden">
             <div class="relative h-full w-full bg-[rgb(20,20,20)] flex flex-col p-5 gap-10">
                 <div class="flex max-md:flex-col gap-3 md:flex-row items-center justify-between">
-                    <h2 class="max-sm:text-4xl sm:text-5xl text-white">Empleados</h2> 
+                    <h2 class="max-sm:text-4xl sm:text-5xl text-white">Administradores</h2> 
                     <button class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalAdmin" data-te-ripple-init>Crear Administrador</button>
                 </div>
                 <div class="w-full relative flex justify-center">
@@ -79,7 +79,7 @@
         <div data-te-modal-dialog-ref class="relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[0px]:m-0 min-[0px]:h-full min-[0px]:max-w-none">
             <div class="relative flex w-full flex-col bg-black outline-none min-[0px]:h-full">
                 <div class="flex flex-shrink-0 items-center justify-between border-b-2 border-[rgb(255,100,0)] p-5 text-4xl text-white">
-                    <h5>Creación de Administrador </h5>
+                    <h5>Creación de Empleados </h5>
                     <button type="button" class="hover:text-[rgb(255,100,0)] rotate-45 transform duration-300 hover:-rotate-45" data-te-modal-dismiss ><i class='bx bx-cross'></i></i></button>
                 </div>
                 <div class="relative p-5 min-[0px]:overflow-y-auto flex justify-center">
@@ -101,8 +101,15 @@
                                 <label for="" class="text-white text-xl">Contraseña:</label>
                                 <input type="password" name="contraAdmin" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
                             </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="rolAdmin" class="text-white text-xl">Rol</label>
+                                <select id="rolAdmin" name="rolAdmin" required class="outline-none border p-2 bg-neutral-950">
+                                    <option value="administrador">Administrador</option>
+                                    <option value="trabajador">Trabajador</option>
+                                </select>
+                            </div>                            
                             <div class="flex pt-7 items-center justify-between space-x-5">
-                                <input type="submit" name="InsertarAdmin" autocomplete="off" value="Crear Administrador" class="bg-white cursor-pointer text-xl text-black p-2 rounded-tl-lg rounded-br-lg hover:bg-cyan-300 transform duration-200 mt-3">
+                                <input type="submit" name="InsertarAdmin" autocomplete="off" value="Crear Trabajador" class="bg-white cursor-pointer text-xl text-black p-2 rounded-tl-lg rounded-br-lg hover:bg-cyan-300 transform duration-200 mt-3">
                             </div>
                         </div>
                     </form>

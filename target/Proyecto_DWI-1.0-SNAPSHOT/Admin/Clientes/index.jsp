@@ -36,7 +36,7 @@
                                         <th scope="col" class=" p-5">Correo Electrónico</th>
                                         <th scope="col" class=" p-5">Contraseña</th>
                                         <th scope="col" class=" p-5">Telefono</th>
-                                        <th hidden scope="col" class=" p-5">Puntos</th>
+                                        <th hidden   scope="col" class=" p-5">Puntos</th>
                                         <th scope="col" class=" p-5">Visitas</th>
                                     </tr>
                                 </thead>
