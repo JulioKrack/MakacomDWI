@@ -10,18 +10,19 @@ public class Usuario {
     private String correo;
     private String contraseña;
     private String rol;
-    
+    private int visita;
 
     public Usuario() {
     }
-    
 
-    public Usuario(String nombres, String apellidos, String correo, String contraseña, String rol) {
+    public Usuario(int id, String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
+        this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
         this.contraseña = contraseña;
         this.rol = rol;
+        this.visita = visita;
     }
 
     public int getId() {
@@ -71,6 +72,16 @@ public class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public int getVisita() {
+        return visita;
+    }
+
+    public void setVisita(int visita) {
+        this.visita = visita;
+    }
+    
+
     
     public boolean ConAtributosVacios() {
         return

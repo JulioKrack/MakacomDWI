@@ -252,38 +252,51 @@ public class UsuariosDAO extends Conexion{
     
     public Usuario ValidarUsuario(String correo, String contra){
         PreparedStatement ps = null;
-        ResultSet rs=null;
+        PreparedStatement ps2 = null;
+        ResultSet rs = null;
         Connection con = getConnection();
+        Usuario u = null;
         try {
-            ps=con.prepareStatement("SELECT * FROM Usuarios WHERE email=? AND contraseña=?");
+            // Validar el usuario
+            ps = con.prepareStatement("SELECT * FROM Usuarios WHERE email=? AND contraseña=?");
             ps.setString(1, correo);
             ps.setString(2, contra);
-            rs=ps.executeQuery();
-            Usuario u=new Usuario();
-            while (rs.next()) {                
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                u = new Usuario();
+                u.setId(rs.getInt("id"));
                 u.setNombres(rs.getString("nombres"));
                 u.setApellidos(rs.getString("apellidos"));
                 u.setCorreo(rs.getString("email"));
                 u.setContraseña(rs.getString("contraseña"));
                 u.setRol(rs.getString("rol"));
-                u.setId(rs.getInt("id"));
+                u.setVisita(rs.getInt("visita"));
+
+                // Incrementar contador de visitas
+                String sql2 = "UPDATE Usuarios SET visita = visita + 1 WHERE id = ?";
+                ps2 = con.prepareStatement(sql2);
+                ps2.setInt(1, u.getId());
+                ps2.executeUpdate();
                 
+                // Incrementar contador de visitas en el objeto Usuario
+                u.setVisita(u.getVisita() + 1);
             }
-            return  u;
+            return u;
             
         } catch (SQLException e) {
-            
-            Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e);
+            Logger.getLogger(UsuariosDAO.class.getName()).log(Level.SEVERE, null, "Error: " + e);
             return null;
             
         } finally {    
-            
             try {
-                con.close();
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (ps2 != null) ps2.close();
+                if (con != null) con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, "Error: "+ex);
+                Logger.getLogger(UsuariosDAO.class.getName()).log(Level.SEVERE, null, "Error: " + ex);
             }
-            
         }
     }
     
@@ -392,4 +405,6 @@ public class UsuariosDAO extends Conexion{
         }
         return cantidad;
     }
+    
+    
 }
