@@ -36,6 +36,7 @@
                                         <th class="max-md:hidden" scope="col" class=" p-5">Apellidos</th>
                                         <th scope="col" class=" p-5">Correo Electrónico</th>
                                         <th class="max-xl:hidden" scope="col" class=" p-5">Contraseña</th>
+                                        <th class="max-xl:hidden" scope="col" class=" p-5">Visitas</th>
                                         <th scope="col" class=" p-5">Acciones</th>
                                     </tr>
                                 </thead>
@@ -52,6 +53,7 @@
                                             <td class="p-2 max-md:hidden truncate max-w-[200px]"><%= usuario.getApellidos() %></td>
                                             <td class="p-2 truncate max-w-[200px]"><%= usuario.getCorreo() %></td>
                                             <td class="p-2  max-xl:hidden truncate max-w-[200px]"><%= usuario.getContraseña() %></td>
+                                            <td class="p-2  max-xl:hidden truncate max-w-[200px]"><%= usuario.getVisita() %></td>
                                             <td class="flex justify-center gap-2 p-2">
                                                 <a href="modificar.jsp?id=<%= usuario.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <% if(usuarios.size()>1 && usuario.getId()!=u.getId()) {%>

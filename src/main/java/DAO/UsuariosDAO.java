@@ -125,6 +125,7 @@ public class UsuariosDAO extends Conexion{
                     u.setCorreo(rs.getString("email"));
                     u.setContraseña(rs.getString("contraseña"));
                     u.setRol(rs.getString("rol"));
+                    u.setVisita(rs.getInt("visita"));
                     usuarios.add(u);
                 }
              return usuarios;
@@ -184,7 +185,7 @@ public class UsuariosDAO extends Conexion{
         ResultSet rs=null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, u.contraseña, c.telefono, c.puntos\n" +
+             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, u.contraseña, c.telefono, c.puntos, u.visita\n" +
                                         "FROM usuarios u\n" +
                                         "INNER JOIN clientes c ON u.id = c.usuario_id");
              rs = ps.executeQuery();
@@ -197,6 +198,7 @@ public class UsuariosDAO extends Conexion{
                     c.setContraseña(rs.getString("contraseña"));
                     c.setTelefono(rs.getString("telefono"));
                     c.setPuntos(rs.getInt("puntos"));
+                    c.setVisita(rs.getInt("visita"));
                     clientes.add(c);
                 }
              return clientes;
