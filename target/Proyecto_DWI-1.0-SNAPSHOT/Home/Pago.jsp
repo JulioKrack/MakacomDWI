@@ -128,10 +128,51 @@
     </section>
 </main>
 <script>
-        const btn=document.getElementById('pagarBTN');
-        btn.addEventListener('click', Enviar);
+    const btn = document.getElementById('pagarBTN');
+    btn.addEventListener('click', Enviar);
 
-        async function Enviar() {
+    async function Enviar() {
+        const formulario = document.getElementById('FormContacto');
+        const err = document.getElementById('errorSpan');
+
+        const nombresInput = formulario.querySelector('[name="contactoNombres"]');
+        const apellidosInput = formulario.querySelector('[name="contactoApellidos"]');
+        const correoInput = formulario.querySelector('[name="contactoCorreo"]');
+        const telefonoInput = formulario.querySelector('[name="contactoTelefono"]');
+
+        if (nombresInput.value.trim() === '' || apellidosInput.value.trim() === '' || correoInput.value.trim() === '' || telefonoInput.value.trim() === '') {
+            err.innerHTML = 'No deje los campos vacíos';
+            return;
+        }
+
+        const formData = new FormData(formulario);
+        formData.append("metodo", "OTROS");
+
+        try {
+            const response = await fetch('../ctrlPago', {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.message == 'Completada') {
+                    alert('Pago completado exitosamente.');
+                    window.location.href = "index.jsp";
+                }
+            }
+
+        } catch (error) {
+            console.log("Error")
+        }
+    }
+</script>
+<script>
+    paypal.Buttons({
+        style: {
+            color: 'blue',
+        },
+        createOrder: function(data, actions) {
             const formulario = document.getElementById('FormContacto');
             const err = document.getElementById('errorSpan');
 
@@ -140,51 +181,10 @@
             const correoInput = formulario.querySelector('[name="contactoCorreo"]');
             const telefonoInput = formulario.querySelector('[name="contactoTelefono"]');
 
-            if ( nombresInput.value.trim() === '' || apellidosInput.value.trim() === '' || correoInput.value.trim() === '' || telefonoInput.value.trim() === '') {
+            if (nombresInput.value.trim() === '' || apellidosInput.value.trim() === '' || correoInput.value.trim() === '' || telefonoInput.value.trim() === '') {
                 err.innerHTML = 'No deje los campos vacíos';
                 return;
             }
-
-            const formData = new FormData(formulario);
-
-            formData.append("metodo", "OTROS");
-
-            try {
-                const response = await fetch('../ctrlPago', {
-                    method: "POST",
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.message =='Completada') {
-                        window.location.href = "index.jsp";
-                    }
-                } 
-
-            } catch (error) {
-               console.log("Error")
-            }
-        }
-</script>
-<script>
-    paypal.Buttons({
-        style: {
-            color: 'blue',
-        },
-        createOrder: function(data, actions) {
-                const formulario = document.getElementById('FormContacto');
-                const err = document.getElementById('errorSpan');
-
-                const nombresInput = formulario.querySelector('[name="contactoNombres"]');
-                const apellidosInput = formulario.querySelector('[name="contactoApellidos"]');
-                const correoInput = formulario.querySelector('[name="contactoCorreo"]');
-                const telefonoInput = formulario.querySelector('[name="contactoTelefono"]');
-
-                if ( nombresInput.value.trim() === '' || apellidosInput.value.trim() === '' || correoInput.value.trim() === '' || telefonoInput.value.trim() === '') {
-                    err.innerHTML = 'No deje los campos vacíos';
-                    return;
-                }
 
             return actions.order.create({
                 purchase_units: [{
@@ -196,7 +196,6 @@
         },
         onApprove: function(data, actions) {
             actions.order.capture().then(function(detalles) {
-                
                 var json = JSON.stringify({
                     detalles: detalles
                 });
@@ -205,10 +204,10 @@
 
                 formData.append("json_data", json);
 
-                if (detalles.purchase_units[0].soft_descriptor) { 
-                    formData.append("metodo","TARJETA")
+                if (detalles.purchase_units[0].soft_descriptor) {
+                    formData.append("metodo", "TARJETA")
                 } else {
-                    formData.append("metodo","PAYPAL")
+                    formData.append("metodo", "PAYPAL")
                 }
 
                 fetch('../ctrlPago', {
@@ -216,6 +215,7 @@
                     mode: "cors",
                     body: formData
                 }).then(function(response) {
+                    alert('Pago completado exitosamente.');
                     window.location.href = "index.jsp";
                 });
             });
@@ -225,6 +225,7 @@
         }
     }).render('#paypal-button-container');
 </script>
+
 <jsp:include page="Components/ModalNav.jsp"/>
 <jsp:include page="Components/ModalBuscador.jsp"/>
 <jsp:include page="../Templates/Footer.jsp"/> 

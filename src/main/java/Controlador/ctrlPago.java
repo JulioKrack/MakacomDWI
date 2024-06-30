@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.security.SecureRandom;
 
 
 @MultipartConfig
@@ -37,6 +37,10 @@ public class ctrlPago extends HttpServlet {
     private DetalleVentasDAO dvdao=new DetalleVentasDAO();
     private UsuariosDAO udao=new UsuariosDAO();
     private ProductosDAO pdao=new ProductosDAO();
+    
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int LENGTH = 16;
+    private final SecureRandom RANDOM = new SecureRandom();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -68,12 +72,13 @@ public class ctrlPago extends HttpServlet {
         String metodo = request.getParameter("metodo");
         
         if (metodo.equals("OTROS")) {
+            String transaccionId = generateTransactionId();
             
             if (u!=null && u.getRol().equals("cliente")) {
                 
                 Cliente c=udao.ObtenerCliente(u.getId());
                 Venta v = new Venta();
-                v.setTransaccion("SIN TRANSACCIÓN");
+                v.setTransaccion(transaccionId);
                 v.setFecha(fecha);
                 v.setHora(hora);
                 v.setMonto(carro.MontoDescontado());
@@ -127,7 +132,7 @@ public class ctrlPago extends HttpServlet {
                 String telefono=request.getParameter("contactoTelefono");
                 
                 Venta v = new Venta();
-                v.setTransaccion("SIN TRANSACCIÓN");
+                v.setTransaccion(transaccionId);
                 v.setFecha(fecha);
                 v.setHora(hora);
                 v.setMonto(carro.Monto());
@@ -288,13 +293,22 @@ public class ctrlPago extends HttpServlet {
             System.out.println(e);
 
         }
-    }
-    
+        
+
+        }
 
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }
+    
+    public String generateTransactionId() {
+        StringBuilder sb = new StringBuilder(LENGTH);
+        for (int i = 0; i < LENGTH; i++) {
+            sb.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
+        }
+        return sb.toString();
+    }  
 
 }
