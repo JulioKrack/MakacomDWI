@@ -57,9 +57,9 @@
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getMarca() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getTelefono() %></td>
                                             <td hidden class="flex justify-center gap-2 p-2">
-                                                <a href="modificar.jsp?id=<%= clie.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a hidden href="modificar.jsp?id=<%= clie.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <% if(proveedor.size()>0 && clie.getId()!=uSesion.getId()) {%>
-                                                    <form action="../../ctrlProveedor" method="post" class="relative">
+                                                    <form hidden action="../../ctrlProveedor" method="post" class="relative">
                                                         <input  type="hidden" name="idProveedor" value="<%= clie.getId() %>">
                                                         <button type="submit" name="EliminarProveedor" class="bg-red-500 w-full text-white py-2 px-4 filter hover:saturate-200 transform duration-200 rounded-tl-md rounded-br-md cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                                                     </form>
