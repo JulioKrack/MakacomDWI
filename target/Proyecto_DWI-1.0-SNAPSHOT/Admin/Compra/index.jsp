@@ -116,7 +116,7 @@
                             <label for="" class="text-white text-xl">Proveedor</label>
                             <select id="proveedorCompra" name="proveedorCompra" required class="outline-none border  p-2 bg-neutral-950">
                                 <% for (Proveedor proveedor : proveedores) { %>
-                                    <option value="<%= proveedor.getId() %>"><%= proveedor.getNombres() %></option>
+                                    <option value="<%= proveedor.getId() %>" data-marca="<%= proveedor.getMarca() %>"><%= proveedor.getNombres() %></option>
                                 <% } %>
                             </select>
                         </div>
@@ -169,18 +169,25 @@
 
         proveedorSelect.addEventListener('change', function() {
             const proveedorId = this.value;
-            marcaSelect.value = '';
-            productoSelect.innerHTML = '<option value="">Seleccione un producto</option>';
-            marcaSelect.dispatchEvent(new Event('change'));
+            const selectedOption = this.options[this.selectedIndex];
+            const marcaId = selectedOption.getAttribute('data-marca');
+
+            marcaSelect.value = marcaId;
+
+            Array.from(productoSelect.options).forEach(option => {
+                option.style.display = option.getAttribute('data-marca') === marcaId ? 'block' : 'none';
+            });
+
+            productoSelect.value = '';
         });
 
         marcaSelect.addEventListener('change', function() {
             const marcaId = this.value;
-            const options = Array.from(productoSelect.options);
-
-            options.forEach(option => {
+            Array.from(productoSelect.options).forEach(option => {
                 option.style.display = option.getAttribute('data-marca') === marcaId ? 'block' : 'none';
             });
+
+            productoSelect.value = '';
         });
     });
 </script>
