@@ -2,8 +2,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DAO.ComprasDAO" %>
 <%@ page import="DAO.ProveedoresDAO" %>
+<%@ page import="DAO.MarcasDAO" %>
+<%@ page import="DAO.ProductosDAO" %>
 <%@ page import="Modelos.Compra" %>
 <%@ page import="Modelos.Proveedor" %>
+<%@ page import="Modelos.Marca" %>
+<%@ page import="Modelos.Producto" %>
 <%@ page import="Modelos.Usuario" %>
 
 <%
@@ -19,6 +23,12 @@
 
     ProveedoresDAO pDAO = new ProveedoresDAO();
     ArrayList<Proveedor> proveedores = pDAO.ListarProveedor();
+
+    MarcasDAO mDAO = new MarcasDAO();
+    ArrayList<Marca> marcas = mDAO.Listar();
+
+    ProductosDAO prodDAO = new ProductosDAO();
+    ArrayList<Producto> productos = prodDAO.Listar();
 %>
 
 <jsp:include page="../../Templates/Head.jsp"/> 
@@ -81,7 +91,7 @@
         <div class="relative flex w-full flex-col bg-black outline-none min-[0px]:h-full">
             <div class="flex flex-shrink-0 items-center justify-between border-b-2 border-[rgb(255,100,0)] p-5 text-4xl text-white">
                 <h5>Orden de Compra </h5>
-                <button type="button" class="hover:text-[rgb(255,100,0)] rotate-45 transform duration-300 hover:-rotate-45" data-te-modal-dismiss ><i class='bx bx-cross'></i></i></button>
+                <button type="button" class="hover:text-[rgb(255,100,0)] rotate-45 transform duration-300 hover:-rotate-45" data-te-modal-dismiss ><i class='bx bx-cross'></i></button>
             </div>
             <div class="relative p-5 min-[0px]:overflow-y-auto flex justify-center">
                 <form action="../../ctrlCompra" method="POST" class="text-white  w-[500px] text-xl flex flex-col gap-3" autocomplete="off">
@@ -104,22 +114,36 @@
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Proveedor</label>
-                            <select name="proveedorCompra" required class="outline-none border  p-2 bg-neutral-950">
+                            <select id="proveedorCompra" name="proveedorCompra" required class="outline-none border  p-2 bg-neutral-950">
                                 <% for (Proveedor proveedor : proveedores) { %>
                                     <option value="<%= proveedor.getId() %>"><%= proveedor.getNombres() %></option>
                                 <% } %>
                             </select>
                         </div>
                         <div class="flex flex-col space-y-2">
-                            <label for="" class="text-white text-xl">Método de Pago</label>
-                                <select id="rolAdmin" name="rolAdmin" required class="outline-none border p-2 bg-neutral-950">
-                                    <option value="administrador">Efectivo</option>
-                                    <option value="trabajador"></option>
-                                </select>
+                            <label for="" class="text-white text-xl">Marca</label>
+                            <select id="marcaCompra" name="marcaCompra" required class="outline-none border  p-2 bg-neutral-950">
+                                <option value="">Seleccione una marca</option>
+                                <% for (Marca marca : marcas) { %>
+                                    <option value="<%= marca.getId() %>"><%= marca.getNombre() %></option>
+                                <% } %>
+                            </select>
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Producto</label>
-                            <input type="text" name="producto" required autocomplete="off" class="outline-none border  p-2 bg-neutral-950">
+                            <select id="productoCompra" name="productoCompra" required class="outline-none border  p-2 bg-neutral-950">
+                                <option value="">Seleccione un producto</option>
+                                <% for (Producto producto : productos) { %>
+                                    <option data-marca="<%= producto.getMarca() %>" value="<%= producto.getId() %>"><%= producto.getNombre() %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label for="" class="text-white text-xl">Método de Pago</label>
+                            <select name="metodoCompra" required class="outline-none border p-2 bg-neutral-950">
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Cantidad</label>
@@ -136,3 +160,27 @@
 </div>           
 <jsp:include page="../Components/ModalNav.jsp"/>
 <jsp:include page="../../Templates/Footer.jsp"/> 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const proveedorSelect = document.getElementById('proveedorCompra');
+        const marcaSelect = document.getElementById('marcaCompra');
+        const productoSelect = document.getElementById('productoCompra');
+
+        proveedorSelect.addEventListener('change', function() {
+            const proveedorId = this.value;
+            marcaSelect.value = '';
+            productoSelect.innerHTML = '<option value="">Seleccione un producto</option>';
+            marcaSelect.dispatchEvent(new Event('change'));
+        });
+
+        marcaSelect.addEventListener('change', function() {
+            const marcaId = this.value;
+            const options = Array.from(productoSelect.options);
+
+            options.forEach(option => {
+                option.style.display = option.getAttribute('data-marca') === marcaId ? 'block' : 'none';
+            });
+        });
+    });
+</script>

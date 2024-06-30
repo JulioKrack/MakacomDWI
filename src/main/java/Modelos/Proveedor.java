@@ -1,13 +1,13 @@
 package Modelos;
 
 public class Proveedor extends Usuario {
-    private String marca;
+    private int marca;
     private String telefono;
 
     public Proveedor() {
     }
 
-    public Proveedor(String marca, String telefono, String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
+    public Proveedor(int marca, String telefono, String nombres, String apellidos, String correo, String contraseña, String rol, int visita) {
         super(nombres, apellidos, correo, contraseña, rol, visita);
         this.marca = marca;
         this.telefono = telefono;
@@ -17,11 +17,11 @@ public class Proveedor extends Usuario {
 
 
 
-    public String getMarca() {
+    public int getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(int marca) {
         this.marca = marca;
     }
 

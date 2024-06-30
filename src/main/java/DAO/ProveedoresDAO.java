@@ -43,9 +43,9 @@ public class ProveedoresDAO extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConnection();
         try{        
-            ps=con.prepareStatement("INSERT INTO Proveedor(proveedor_id,marca,telefono) VALUES(?,?,?)");
+            ps=con.prepareStatement("INSERT INTO Proveedor(proveedor_id,marca_id,telefono) VALUES(?,?,?)");
             ps.setInt(1, id);
-            ps.setString(2, u.getMarca());
+            ps.setInt(2, u.getMarca());
             ps.setString(3, u.getTelefono());
             ps.execute();
             return true; 
@@ -86,8 +86,8 @@ public class ProveedoresDAO extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConnection();
         try {
-            ps = con.prepareStatement("UPDATE Proveedor SET marca=?, telefono=? WHERE proveedor_id=?");
-            ps.setString(1, p.getMarca());
+            ps = con.prepareStatement("UPDATE Proveedor SET marca_id=?, telefono=? WHERE proveedor_id=?");
+            ps.setInt(1, p.getMarca());
             ps.setString(2, p.getTelefono());
             ps.setInt(3, u.getId());
             ps.execute();
@@ -170,7 +170,7 @@ public class ProveedoresDAO extends Conexion{
         ResultSet rs=null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, c.telefono, c.marca\n" +
+             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, c.telefono, c.marca_id\n" +
                                         "FROM usuarios u\n" +
                                         "INNER JOIN proveedor c ON u.id = c.proveedor_id");
              rs = ps.executeQuery();
@@ -181,7 +181,7 @@ public class ProveedoresDAO extends Conexion{
                     c.setApellidos(rs.getString("apellidos"));
                     c.setCorreo(rs.getString("email"));
                     
-                    c.setMarca(rs.getString("marca"));
+                    c.setMarca(rs.getInt("marca_id"));
                     c.setTelefono(rs.getString("telefono"));
                     
                     proveedor.add(c);
@@ -317,7 +317,7 @@ public class ProveedoresDAO extends Conexion{
         ResultSet rs=null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, c.telefono, c.marca\n" +
+             ps = con.prepareStatement( "SELECT u.id, u.nombres, u.apellidos, u.email, c.telefono, c.marca_id\n" +
                                         "FROM usuarios u\n" +
                                         "INNER JOIN proveedor c ON u.id = c.proveedor_id");
              rs = ps.executeQuery();
@@ -326,7 +326,7 @@ public class ProveedoresDAO extends Conexion{
                     c.setNombres(rs.getString("nombres"));
                     c.setApellidos(rs.getString("apellidos"));
                     c.setCorreo(rs.getString("email"));
-                    c.setMarca(rs.getString("marca"));
+                    c.setMarca(rs.getInt("marca"));
                     c.setTelefono(rs.getString("telefono"));
                     
                 }

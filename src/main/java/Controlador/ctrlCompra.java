@@ -47,12 +47,10 @@ public class ctrlCompra extends HttpServlet {
             String producto = request.getParameter("producto");
             String cantidad = request.getParameter("cantidad");
 
-            // Convertir los valores que son números a los tipos adecuados
             int id = 1;
             double monto = Double.parseDouble(montoString);
             int cantidadpro = Integer.parseInt(cantidad);
 
-            // Crear una instancia de Compra con los valores obtenidos
             Compra c = new Compra(id, transaccion, fecha, hora, monto, nombreProveedor, producto,cantidadpro,metodo);
 
 

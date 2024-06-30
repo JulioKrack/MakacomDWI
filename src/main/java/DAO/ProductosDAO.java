@@ -151,7 +151,7 @@ public class ProductosDAO extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConnection();
         try {
-            ps = con.prepareStatement("UPDATE Productos SET estado='habilitado' WHERE id=?");
+            ps = con.prepareStatement("UPDATE Productos SET estado='Habilitado' WHERE id=?");
             ps.setInt(1, id);
             ps.execute();
             return true;

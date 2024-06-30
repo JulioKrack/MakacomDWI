@@ -37,48 +37,52 @@ public class ctrlProveedor extends HttpServlet {
         processRequest(request, response);
         
         
-        if (request.getParameter("InsertarPro")!= null) {
-            
-            String nombres=request.getParameter("nombresPro");
-            String apellidos=request.getParameter("apellidosPro");
-            String correo=request.getParameter("correoPro");
-            String contra="123";
-            String marca=request.getParameter("marcaPro");
-            String telefono=request.getParameter("telefonoPro");
-            int vis=0;
-            
-            Usuario u=new Usuario(nombres, apellidos, correo, contra, "proveedor", vis );
+        if (request.getParameter("InsertarPro") != null) {
+            String nombres = request.getParameter("nombresPro");
+            String apellidos = request.getParameter("apellidosPro");
+            String correo = request.getParameter("correoPro");
+            String contra = "123";
+            int marca = Integer.parseInt(request.getParameter("marcaPro"));
+            String telefono = request.getParameter("telefonoPro");
+
+            int vis = 0;
+
+            Usuario u = new Usuario(nombres, apellidos, correo, contra, "proveedor", vis);
 
             if (pDAO.Insertar(u)) {
-                int id=pDAO.ObtenerIDgenerado();
-                    Proveedor p=new Proveedor(marca,telefono,nombres, apellidos, correo, null ,"proveedor",0);
-                    if (pDAO.InsertarProveedor(p, id)) {
-                        response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
-                   
+                int id = pDAO.ObtenerIDgenerado();
+                Proveedor p = new Proveedor(marca, telefono, nombres, apellidos, correo, null, "proveedor", vis);
+                if (pDAO.InsertarProveedor(p, id)) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/?error=true");
                 }
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/?error=true");
             }
-            
         }
-        
-        if (request.getParameter("ModificarPro")!=null) {
-            
-            String nombres=request.getParameter("nombresPro");
-            String apellidos=request.getParameter("apellidosPro");
-            String correo=request.getParameter("correoPro");
-            String telefono=request.getParameter("telefonoPro");
-            String marca=request.getParameter("marcaPro");
-            int id =Integer.parseInt(request.getParameter("idProveedor"));
-            
-            Usuario u=new Usuario(nombres, apellidos, correo, null ,"proveedor",1);
+
+        if (request.getParameter("ModificarPro") != null) {
+            String nombres = request.getParameter("nombresPro");
+            String apellidos = request.getParameter("apellidosPro");
+            String correo = request.getParameter("correoPro");
+            String telefono = request.getParameter("telefonoPro");
+            int marca = Integer.parseInt(request.getParameter("marcaPro"));
+            int id = Integer.parseInt(request.getParameter("idProveedor"));
+
+            Usuario u = new Usuario(nombres, apellidos, correo, null, "proveedor", 1);
             u.setId(id);
-            Proveedor p=new Proveedor(marca,telefono,nombres, apellidos, correo, null ,"proveedor",1);
-            
+            Proveedor p = new Proveedor(marca, telefono, nombres, apellidos, correo, null, "proveedor", 1);
             p.setId(id);
 
-            if (uDAO.Modificar(u)) {
-                if(pDAO.ModificarProveedor(u,p))
-                response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
-            
+            if (pDAO.Modificar(u)) {
+                if (pDAO.ModificarProveedor(u, p)) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/?error=true");
+                }
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Admin/Proveedores/?error=true");
             }
         }
         

@@ -115,7 +115,7 @@
                                                     <input type="hidden" name="idprodu" value="<%= producto.getId() %>">
                                                     <button type="submit" name="EliminarProducto" value="Eliminar" class="bg-red-500 w-full text-white px-2 py-1 filter hover:saturate-200 transform duration-200 rounded-tl-md rounded-br-md cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                                                 </form>
-                                                <% if(producto.getEstado().equals("habilitado")) { %>
+                                                <% if(producto.getEstado().equals("Habilitado")) { %>
                                                 <form action="../../ctrlProductos" method="post" class="w-full relative">
                                                     <input type="hidden" name="idprodu" value="<%= producto.getId() %>">
                                                     <button type="submit" name="InhabilitarProducto" class="bg-yellow-500 w-full text-black px-2 py-1 filter hover:saturate-200 transform duration-200 rounded-tl-md rounded-br-md cursor-pointer"><i class="fas fa-lock"></i></button>
