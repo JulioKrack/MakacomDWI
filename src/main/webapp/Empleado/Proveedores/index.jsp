@@ -23,7 +23,7 @@
             <div class="relative h-full w-full bg-[rgb(20,20,20)] flex flex-col p-5 gap-10">
                 <div class="flex items-center justify-between">
                     <h2 class="max-sm:text-4xl sm:text-5xl text-white">Proveedores</h2> 
-                    <button class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalPro" data-te-ripple-init>Crear Proveedor</button>                
+                    <button hidden class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalPro" data-te-ripple-init>Crear Proveedor</button>                
                 </div>
                 <div class="w-full relative flex justify-center">
                     <div class="flex relative w-full overflow-x-auto scrollbar-thin scrollbar-track-black scrollbar-thumb-orange-600">
@@ -38,7 +38,7 @@
                                         <th hidden scope="col" class=" p-5">Contraseña</th>
                                         <th scope="col" class=" p-5">Marca</th>
                                         <th scope="col" class=" p-5">Telefono</th>
-                                        <th scope="col" class=" p-5">Acciones</th>
+                                        <th hidden scope="col" class=" p-5">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
@@ -56,7 +56,7 @@
                                             <td hidden class="p-2 truncate max-w-[140px]"><%= clie.getContraseña() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getMarca() %></td>
                                             <td class="p-2 truncate max-w-[140px]"><%= clie.getTelefono() %></td>
-                                            <td class="flex justify-center gap-2 p-2">
+                                            <td hidden class="flex justify-center gap-2 p-2">
                                                 <a href="modificar.jsp?id=<%= clie.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <% if(proveedor.size()>0 && clie.getId()!=uSesion.getId()) {%>
                                                     <form action="../../ctrlProveedor" method="post" class="relative">

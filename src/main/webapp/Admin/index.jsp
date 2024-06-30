@@ -278,7 +278,7 @@
                 data: {
                     labels: labelsVentas,
                     datasets: [{
-                        label: '$/ (DOLARES)',
+                        label: '$/ (SOLES)',
                         data: dataVentas,
                         backgroundColor:[
                         'rgba(255, 0, 0, 0.8)'
@@ -351,7 +351,7 @@
                 data: {
                     labels: labelsVentas,
                     datasets: [{
-                        label: '$/ (DOLARES)',
+                        label: '$/ (SOLES)',
                         data: dataVentas,
                         backgroundColor:[
                         'rgb(255, 255, 255)'

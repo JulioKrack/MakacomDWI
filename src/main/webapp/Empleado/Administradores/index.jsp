@@ -23,7 +23,7 @@
             <div class="relative h-full w-full bg-[rgb(20,20,20)] flex flex-col p-5 gap-10">
                 <div class="flex max-md:flex-col gap-3 md:flex-row items-center justify-between">
                     <h2 class="max-sm:text-4xl sm:text-5xl text-white">Administradores</h2> 
-                    <button class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalAdmin" data-te-ripple-init>Crear Administrador</button>
+                    <button hidden class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalAdmin" data-te-ripple-init>Crear Administrador</button>
                 </div>
                 <div class="w-full relative flex justify-center">
                     <div class="flex relative w-full overflow-x-auto scrollbar-thin scrollbar-track-black scrollbar-thumb-orange-600">
@@ -37,7 +37,7 @@
                                         <th scope="col" class=" p-5">Correo Electrónico</th>
                                         <th class="max-xl:hidden" scope="col" class=" p-5">Contraseña</th>
                                         <th class="max-xl:hidden" scope="col" class=" p-5">Visitas</th>
-                                        <th scope="col" class=" p-5">Acciones</th>
+                                        <th hidden scope="col" class=" p-5">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
@@ -54,7 +54,7 @@
                                             <td class="p-2 truncate max-w-[200px]"><%= usuario.getCorreo() %></td>
                                             <td class="p-2  max-xl:hidden truncate max-w-[200px]"><%= usuario.getContraseña() %></td>
                                             <td class="p-2  max-xl:hidden truncate max-w-[200px]"><%= usuario.getVisita() %></td>
-                                            <td class="flex justify-center gap-2 p-2">
+                                            <td hidden class="flex justify-center gap-2 p-2">
                                                 <a href="modificar.jsp?id=<%= usuario.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <% if(usuarios.size()>1 && usuario.getId()!=u.getId()) {%>
                                                     <form action="../../ctrlUsuarios" method="post" class="relative">
@@ -75,7 +75,7 @@
             </div>
         </section> 
     </main>
-    <div data-te-modal-init class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="ModalAdmin" tabindex="-1" aria-labelledby="ModalAdmin" aria-hidden="true">
+    <div hidden data-te-modal-init class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="ModalAdmin" tabindex="-1" aria-labelledby="ModalAdmin" aria-hidden="true">
         <div data-te-modal-dialog-ref class="relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[0px]:m-0 min-[0px]:h-full min-[0px]:max-w-none">
             <div class="relative flex w-full flex-col bg-black outline-none min-[0px]:h-full">
                 <div class="flex flex-shrink-0 items-center justify-between border-b-2 border-[rgb(255,100,0)] p-5 text-4xl text-white">

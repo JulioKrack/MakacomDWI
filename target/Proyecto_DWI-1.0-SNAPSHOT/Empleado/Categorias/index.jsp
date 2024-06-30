@@ -23,7 +23,7 @@
             <div class="relative h-full w-full bg-[rgb(20,20,20)] flex flex-col p-5 gap-10">
                 <div class="flex max-sm:flex-col max-sm:gap-3 items-center justify-between">
                     <h2 class="max-sm:text-4xl sm:text-5xl text-white">Categorias</h2>
-                    <button class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalCategorias" data-te-ripple-init>Crear Categoria</button>
+                    <button hidden class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalCategorias" data-te-ripple-init>Crear Categoria</button>
                 </div>
                 <div class="w-full relative flex justify-center">
                     <div class="flex relative w-full overflow-x-auto scrollbar-thin scrollbar-track-black scrollbar-thumb-orange-600">
@@ -34,7 +34,7 @@
                                         <th scope="col" class=" p-5">ID</th>
                                         <th scope="col" class=" p-5">Nombre</th>
                                         <th class="max-sm:hidden" scope="col" class=" p-5">Descripción</th>
-                                        <th scope="col" class=" p-5">Acciones</th>
+                                        <th hidden scope="col" class=" p-5">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
@@ -48,7 +48,7 @@
                                             <td class="px-2"><%= cate.getId() %></td>
                                             <td class="px-2 max-w-[200px] truncate"><%= cate.getNombre() %></td>
                                             <td class="px-2 max-sm:hidden max-w-[300px] truncate"><%= cate.getDesc() %></td>
-                                            <td class="flex justify-center gap-2 p-2 ">
+                                            <td hidden class="flex justify-center gap-2 p-2 ">
                                                 <a href="modificar.jsp?id=<%= cate.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <form action="../../ctrlCategorias" method="post">
                                                     <input type="hidden" name="idCategoria" value="<%= cate.getId() %>">
