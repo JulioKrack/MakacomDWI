@@ -59,7 +59,7 @@
                                             <td class="px-2 truncate max-w-[200px]"><%= venta.getIdcliente() %></td>
                                             <td hidden class="px-2 truncate max-w-[200px]"><%= venta.getMetodo() %></td>
                                             <td hidden class="flex flex-col gap-2 p-2">
-                                                <a href="detalle.jsp?id=<%= venta.getId() %>" class="bg-white text-black px-2 py-1 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md">Ver Detalle</a>
+                                                <a hidden href="detalle.jsp?id=<%= venta.getId() %>" class="bg-white text-black px-2 py-1 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md">Ver Detalle</a>
                                             </td>
                                         </tr>
                                     <% } %>

@@ -49,8 +49,8 @@
                                             <td class="px-2 max-w-[200px] truncate"><%= cate.getNombre() %></td>
                                             <td class="px-2 max-sm:hidden max-w-[300px] truncate"><%= cate.getDesc() %></td>
                                             <td hidden class="flex justify-center gap-2 p-2 ">
-                                                <a href="modificar.jsp?id=<%= cate.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <form action="../../ctrlCategorias" method="post">
+                                                <a hidden href="modificar.jsp?id=<%= cate.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <form hidden action="../../ctrlCategorias" method="post">
                                                     <input type="hidden" name="idCategoria" value="<%= cate.getId() %>">
                                                     <button type="submit" name="EliminarCategoria" class="bg-red-500 w-full text-white py-2 px-4 filter hover:saturate-200 transform duration-200 rounded-tl-md rounded-br-md cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                                                 </form>

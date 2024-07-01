@@ -56,6 +56,14 @@
         <servlet-name>ctrlCompra</servlet-name>
         <servlet-class>Controlador.ctrlCompra</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ctrlCompraEmp</servlet-name>
+        <servlet-class>Controlador.ctrlCompraEmp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ctrlInventarioEmp</servlet-name>
+        <servlet-class>Controlador.ctrlInventarioEmp</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ctrlMarcas</servlet-name>
         <url-pattern>/ctrlMarcas</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>ctrlCompra</servlet-name>
         <url-pattern>/ctrlCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ctrlCompraEmp</servlet-name>
+        <url-pattern>/ctrlCompraEmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ctrlInventarioEmp</servlet-name>
+        <url-pattern>/ctrlInventarioEmp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

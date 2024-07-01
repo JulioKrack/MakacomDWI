@@ -55,9 +55,9 @@
                                             <td class="p-2  max-xl:hidden truncate max-w-[200px]"><%= usuario.getContraseña() %></td>
                                             <td class="p-2  max-xl:hidden truncate max-w-[200px]"><%= usuario.getVisita() %></td>
                                             <td hidden class="flex justify-center gap-2 p-2">
-                                                <a href="modificar.jsp?id=<%= usuario.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a hidden href="modificar.jsp?id=<%= usuario.getId() %>" class="bg-white text-black py-2 px-4 hover:bg-cyan-300 transform duration-200 rounded-tl-md rounded-br-md"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <% if(usuarios.size()>1 && usuario.getId()!=u.getId()) {%>
-                                                    <form action="../../ctrlUsuarios" method="post" class="relative">
+                                                    <form hidden action="../../ctrlUsuarios" method="post" class="relative">
                                                         <input type="hidden" name="idAdmin" value="<%= usuario.getId() %>">
                                                         <button type="submit" name="EliminarAdmin" class="bg-red-500 w-full text-white py-2 px-4 filter hover:saturate-200 transform duration-200 rounded-tl-md rounded-br-md cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                                                     </form>

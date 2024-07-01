@@ -6,41 +6,41 @@
     <div class="flex flex-col w-full items-center bg-transparent">
         <ul class="text-xl text-white flex flex-col items-center w-full">
             <li class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2" href="<%=url %>/Admin/"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2" href="<%=url %>/Empleado/"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
             </li>
             <li class=" w-full ">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Admin/Empleados/"><i class='bx bx-shield-quarter'></i> Empleados</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Empleado/Empleados/"><i class='bx bx-shield-quarter'></i> Empleados</a>
             </li>
             <li class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Productos/"><i class="fa-solid fa-computer"></i> Productos</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Empleado/Productos/"><i class="fa-solid fa-computer"></i> Productos</a>
             </li>
             <li class=" w-full ">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Inventario/"><i class="fa-solid fa-box"></i> Inventario</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Empleado/Inventario/"><i class="fa-solid fa-box"></i> Inventario</a>
             </li>
             <li class=" w-full ">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Marcas/"><i class="fa-solid fa-laptop"></i> Marcas</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Empleado/Marcas/"><i class="fa-solid fa-laptop"></i> Marcas</a>
             </li>
             <li class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Categorias/"><i class='bx bxs-category'></i> Categorías</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Empleado/Categorias/"><i class='bx bxs-category'></i> Categorías</a>
             </li>
             <li class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Proveedores/"><i class='bx bxs-category'></i> Proveedores</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Empleado/Proveedores/"><i class='bx bxs-category'></i> Proveedores</a>
             </li>
             <li hidden class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Admin/Promociones/"><i class="fa-solid fa-gift"></i>Promociones</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Empleado/Promociones/"><i class="fa-solid fa-gift"></i>Promociones</a>
             </li>
             <li class=" w-full">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Admin/Clientes/"><i class="fa-regular fa-user"></i> Clientes</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2" href="<%=url %>/Empleado/Clientes/"><i class="fa-regular fa-user"></i> Clientes</a>
             </li>
             <li class=" w-full ">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2"href="<%=url %>/Admin/Ventas/"><i class="fa-regular fa-file"></i> Ventas</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2"href="<%=url %>/Empleado/Ventas/"><i class="fa-regular fa-file"></i> Ventas</a>
             </li>
             
             <li class=" w-full ">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2"href="<%=url %>/Admin/Compra/"><i class="fa-regular fa-file"></i> Compras</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide py-4 px-10 gap-2"href="<%=url %>/Empleado/Compra/"><i class="fa-regular fa-file"></i> Compras</a>
             </li>
             <li class=" w-full ">
-                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Admin/Administradores/"><i class='bx bx-shield-quarter'></i> Administradores</a>
+                <a class="w-full h-full flex items-center hover:bg-[rgb(255,100,0)] transform duration-150 tracking-wide  py-4 px-10 gap-2"href="<%=url %>/Empleado/Administradores/"><i class='bx bx-shield-quarter'></i> Administradores</a>
             </li>
         </ul>
     

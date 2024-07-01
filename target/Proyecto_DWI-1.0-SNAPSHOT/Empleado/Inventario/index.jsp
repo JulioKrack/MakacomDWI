@@ -47,7 +47,7 @@
                                             <td class="px-2 truncate max-w-[300px]"><%= producto.getNombre() %></td>
                                             <td class="px-2 truncate"><%= producto.getCantidad() %></td>
                                             <td class="flex gap-2 p-2 justify-center">
-                                                <form action="../../ctrlInventario" method="post"  class="flex max-sm:flex-col sm:flex-row justify-center gap-2">
+                                                <form action="../../ctrlInventarioEmp" method="post"  class="flex max-sm:flex-col sm:flex-row justify-center gap-2">
                                                     <input type="hidden" name="idProducto" value="<%= producto.getId() %>">
                                                     <input type="number" name="cantidadProducto" min="0" max="100" step="1" required class="outline-none pl-1 py-1 w-[140px] border bg-stone-950 text-white">
                                                     <button type="submit" name="Agregar" class="cursor-pointer bg-cyan-300 px-5 py-1 rounded-tl-lg rounded-br-lg text-black filter hover:saturate-200"><i class="fa-solid fa-plus"></i> Agregar</button>

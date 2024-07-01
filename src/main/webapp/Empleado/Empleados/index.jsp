@@ -22,7 +22,7 @@
         <section class="w-full max-sm:overflow-x-hidden">
             <div class="relative h-full w-full bg-[rgb(20,20,20)] flex flex-col p-5 gap-10">
                 <div class="flex max-md:flex-col gap-3 md:flex-row items-center justify-between">
-                    <h2 class="max-sm:text-4xl sm:text-5xl text-white">Administradores</h2> 
+                    <h2 class="max-sm:text-4xl sm:text-5xl text-white">Empleados</h2> 
                     <button hidden class="min-w-[200px] p-2 bg-[rgb(255,100,0)] rounded-tl-md rounded-br-md text-white text-xl hover:bg-white hover:text-black transform duration-300" data-te-toggle="modal" data-te-target="#ModalAdmin" data-te-ripple-init>Crear Trabajador</button>
                 </div>
                 <div class="w-full relative flex justify-center">
@@ -43,7 +43,7 @@
                                 <tbody class="text-white">
                                 <%  if (usuarios.isEmpty()) {  %>
                                     <tr>
-                                        <td colspan="9" class="p-5">No hay administradores registrados</td>
+                                        <td colspan="9" class="p-5">No hay Empleados registrados</td>
                                     </tr>
                                  <% } else {
                                         for (Usuario usuario : usuarios) { %>
