@@ -29,12 +29,25 @@
     ArrayList<Producto> productos = prodDAO.Listar();
 %>
 
-<% HashMap<Integer, String> proveedoresMap = new HashMap<>(); %>
-<% for (Proveedor proveedor : proveedores) { %>
-    <% proveedoresMap.put(proveedor.getId(), proveedor.getNombres()); %>
-<% } %>
+<% 
+    // HashMap para almacenar los nombres de los proveedores
+    HashMap<Integer, String> proveedoresMap = new HashMap<>(); 
+    for (Proveedor proveedor : proveedores) { 
+        proveedoresMap.put(proveedor.getId(), proveedor.getNombres()); 
+    }
 
-<%
+    // HashMap para almacenar los nombres de las marcas
+    HashMap<Integer, String> marcasMap = new HashMap<>(); 
+    for (Marca marca : marcas) { 
+        marcasMap.put(marca.getId(), marca.getNombre()); 
+    }
+
+    // HashMap para almacenar los nombres de los productos
+    HashMap<Integer, String> productosMap = new HashMap<>(); 
+    for (Producto producto : productos) { 
+        productosMap.put(producto.getId(), producto.getNombre()); 
+    }
+
     ComprasDAO cDAO = new ComprasDAO();
     ArrayList<Compra> compras = cDAO.Listar();
 %>
@@ -61,6 +74,7 @@
                                     <th scope="col" class=" p-5">Hora</th>
                                     <th scope="col" class=" p-5">Monto Pagado</th>
                                     <th scope="col" class=" p-5">Proveedor</th>
+                                    <th scope="col" class=" p-5">Marca</th>
                                     <th scope="col" class=" p-5">Método de Pago</th>
                                     <th scope="col" class=" p-5">Producto</th>
                                     <th scope="col" class=" p-5">Cantidad</th>
@@ -80,8 +94,9 @@
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getHora() %></td>
                                         <td class="px-2 truncate max-w-[200px]">$/<%= compra.getMonto() %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= proveedoresMap.get(compra.getProveedor()) %></td>
+                                        <td class="px-2 truncate max-w-[200px]"><%= marcasMap.get(compra.getMarca()) %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getMetodo() %></td>
-                                        <td class="px-2 truncate max-w-[200px]"><%= compra.getProducto() %></td>
+                                        <td class="px-2 truncate max-w-[200px]"><%= productosMap.get(compra.getProducto()) %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getCantidad() %></td>                                            
                                     </tr>
                                 <% } %>
@@ -94,6 +109,7 @@
         </div>
     </section> 
 </main>
+
 <div data-te-modal-init class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="ModalPro" tabindex="-1" aria-labelledby="ModalPro" aria-hidden="true">
     <div data-te-modal-dialog-ref class="relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[0px]:m-0 min-[0px]:h-full min-[0px]:max-w-none">
         <div class="relative flex w-full flex-col bg-black outline-none min-[0px]:h-full">

@@ -2,7 +2,9 @@ package Controlador;
 
 import DAO.ComprasDAO;
 import DAO.DetalleComprasDAO;
+import DAO.ProductosDAO;
 import Modelos.Compra;
+import Modelos.Producto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import java.security.SecureRandom;
 public class ctrlCompra extends HttpServlet {
     ComprasDAO uDAO = new ComprasDAO();
     DetalleComprasDAO pDAO = new DetalleComprasDAO();
+    private final  ProductosDAO prDAO=new ProductosDAO();
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int LENGTH = 16;
@@ -45,6 +48,8 @@ public class ctrlCompra extends HttpServlet {
                 String metodo = request.getParameter("metodoCompra");
                 String productoString = request.getParameter("productoCompra");
                 String cantidadString = request.getParameter("cantidad");
+                
+
 
                 if (fecha == null || hora == null || montoString == null || proveedorString == null ||
                         marcaString == null || metodo == null || productoString == null || cantidadString == null) {
@@ -56,6 +61,7 @@ public class ctrlCompra extends HttpServlet {
                 double monto = Double.parseDouble(montoString);
                 int producto = Integer.parseInt(productoString);
                 int cantidad = Integer.parseInt(cantidadString);
+                
 
                 Compra c = new Compra(0, transaccion, fecha, hora, monto, proveedor, marca, metodo, producto, cantidad);
 

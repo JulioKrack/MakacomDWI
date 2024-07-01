@@ -45,17 +45,35 @@ public class ComprasDAO extends Conexion {
     public boolean ActualizarCantidad(int productoId, int nuevaCantidad) {
         PreparedStatement ps = null;
         Connection con = getConnection();
+        ResultSet rs = null;
         try {
+            // Obtener la cantidad actual del producto
+            ps = con.prepareStatement("SELECT cantidad FROM Productos WHERE id = ?");
+            ps.setInt(1, productoId);
+            rs = ps.executeQuery();
+
+            int cantidadActual = 0;
+            if (rs.next()) {
+                cantidadActual = rs.getInt("cantidad");
+            }
+
+            // Calcular la nueva cantidad
+            int cantidadActualizada = cantidadActual + nuevaCantidad;
+
+            // Actualizar la cantidad del producto
             ps = con.prepareStatement("UPDATE Productos SET cantidad = ? WHERE id = ?");
-            ps.setInt(1, nuevaCantidad);
+            ps.setInt(1, cantidadActualizada);
             ps.setInt(2, productoId);
             ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, e);
             return false;
         } finally {
             try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, ex);
