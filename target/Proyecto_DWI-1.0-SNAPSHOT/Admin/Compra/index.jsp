@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="DAO.ComprasDAO" %>
 <%@ page import="DAO.ProveedoresDAO" %>
 <%@ page import="DAO.MarcasDAO" %>
@@ -17,10 +18,7 @@
     } 
 %>
 
-<% 
-    ComprasDAO cDAO = new ComprasDAO();
-    ArrayList<Compra> compras = cDAO.Listar();
-
+<%
     ProveedoresDAO pDAO = new ProveedoresDAO();
     ArrayList<Proveedor> proveedores = pDAO.ListarProveedor();
 
@@ -29,6 +27,16 @@
 
     ProductosDAO prodDAO = new ProductosDAO();
     ArrayList<Producto> productos = prodDAO.Listar();
+%>
+
+<% HashMap<Integer, String> proveedoresMap = new HashMap<>(); %>
+<% for (Proveedor proveedor : proveedores) { %>
+    <% proveedoresMap.put(proveedor.getId(), proveedor.getNombres()); %>
+<% } %>
+
+<%
+    ComprasDAO cDAO = new ComprasDAO();
+    ArrayList<Compra> compras = cDAO.Listar();
 %>
 
 <jsp:include page="../../Templates/Head.jsp"/> 
@@ -71,7 +79,7 @@
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getFecha() %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getHora() %></td>
                                         <td class="px-2 truncate max-w-[200px]">$/<%= compra.getMonto() %></td>
-                                        <td class="px-2 truncate max-w-[200px]"><%= compra.getNombreProveedor() %></td>
+                                        <td class="px-2 truncate max-w-[200px]"><%= proveedoresMap.get(compra.getProveedor()) %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getMetodo() %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getProducto() %></td>
                                         <td class="px-2 truncate max-w-[200px]"><%= compra.getCantidad() %></td>                                            
@@ -97,16 +105,12 @@
                 <form action="../../ctrlCompra" method="POST" class="text-white  w-[500px] text-xl flex flex-col gap-3" autocomplete="off">
                     <div class="flex flex-col space-y-5 p-6">
                         <div class="flex flex-col space-y-2">
-                            <label for="" class="text-white text-xl">Transacción</label>
-                            <input type="text" name="transaccionCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
-                        </div>
-                        <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Fecha</label>
-                            <input type="text" name="fechaCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
+                            <input type="date" name="fechaCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Hora</label>
-                            <input type="text" name="horaCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
+                            <input type="time" name="horaCompra" required autocomplete="off" class="outline-none w-full border  p-2 bg-neutral-950">    
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Monto</label>
@@ -119,6 +123,7 @@
                                     <option value="<%= proveedor.getId() %>" data-marca="<%= proveedor.getMarca() %>"><%= proveedor.getNombres() %></option>
                                 <% } %>
                             </select>
+
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="" class="text-white text-xl">Marca</label>

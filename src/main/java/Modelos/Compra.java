@@ -1,5 +1,6 @@
-
 package Modelos;
+import DAO.ProveedoresDAO;
+import Modelos.Proveedor;
 
 public class Compra {
     private int id;
@@ -7,99 +8,64 @@ public class Compra {
     private String fecha;
     private String hora;
     private double monto;
-    private String nombreProveedor;
-    private String producto;
+    private int proveedor_id;
+    private int marca_id;
+    private String metodo;
+    private int producto_id;
     private int cantidad;
-    private  String metodo;
 
     public Compra() {
     }
 
-    public Compra(int id, String transaccion, String fecha, String hora, double monto, String nombreProveedor, String producto, int cantidad, String metodo) {
+    public Compra(int id, String transaccion, String fecha, String hora, double monto, int proveedor_id, int marca_id, String metodo, int producto_id, int cantidad) {
         this.id = id;
         this.transaccion = transaccion;
         this.fecha = fecha;
         this.hora = hora;
         this.monto = monto;
-        this.nombreProveedor = nombreProveedor;
-        this.producto = producto;
-        this.cantidad = cantidad;
+        this.proveedor_id = proveedor_id;
+        this.marca_id = marca_id;
         this.metodo = metodo;
+        this.producto_id = producto_id;
+        this.cantidad = cantidad;
     }
+    
+    
 
-    public int getId() {
-        return id;
-    }
+    // Getters y setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getTransaccion() { return transaccion; }
+    public void setTransaccion(String transaccion) { this.transaccion = transaccion; }
 
-    public String getTransaccion() {
-        return transaccion;
-    }
+    public String getFecha() { return fecha; }
+    public void setFecha(String fecha) { this.fecha = fecha; }
 
-    public void setTransaccion(String transaccion) {
-        this.transaccion = transaccion;
-    }
+    public String getHora() { return hora; }
+    public void setHora(String hora) { this.hora = hora; }
 
-    public String getFecha() {
-        return fecha;
-    }
+    public double getMonto() { return monto; }
+    public void setMonto(double monto) { this.monto = monto; }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
+    public int getProveedor() { return proveedor_id; }
+    public void setProveedor(int proveedor_id) { this.proveedor_id = proveedor_id; }
 
-    public String getHora() {
-        return hora;
-    }
+    public int getMarca() { return marca_id; }
+    public void setMarca(int marca_id) { this.marca_id = marca_id; }
 
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
+    public String getMetodo() { return metodo; }
+    public void setMetodo(String metodo) { this.metodo = metodo; }
 
-    public double getMonto() {
-        return monto;
-    }
+    public int getProducto() { return producto_id; }
+    public void setProducto(int producto_id) { this.producto_id = producto_id; }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
-    }
+    public int getCantidad() { return cantidad; }
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
 
     public String getNombreProveedor() {
-        return nombreProveedor;
+        ProveedoresDAO pDAO = new ProveedoresDAO();
+        Proveedor proveedor = pDAO.ObtenerProveedor(this.proveedor_id);
+        return proveedor != null ? proveedor.getNombres() : "Desconocido";
     }
-
-    public void setNombreProveedor(String nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
-    }
-
-    public String getProducto() {
-        return producto;
-    }
-
-    public void setProducto(String producto) {
-        this.producto = producto;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public String getMetodo() {
-        return metodo;
-    }
-
-    public void setMetodo(String metodo) {
-        this.metodo = metodo;
-    }
-
-    
-    
-    
 }

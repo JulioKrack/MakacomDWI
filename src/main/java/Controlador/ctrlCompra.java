@@ -1,28 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controlador;
+
 import DAO.ComprasDAO;
 import DAO.DetalleComprasDAO;
 import Modelos.Compra;
-import Modelos.Usuario;
-import Modelos.Proveedor;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public class ctrlCompra extends HttpServlet {
-    ComprasDAO uDAO =new ComprasDAO();
-    DetalleComprasDAO pDAO =new DetalleComprasDAO();
+    ComprasDAO uDAO = new ComprasDAO();
+    DetalleComprasDAO pDAO = new DetalleComprasDAO();
+
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int LENGTH = 16;
+    private final SecureRandom RANDOM = new SecureRandom();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
     }
 
     @Override
@@ -34,38 +32,55 @@ public class ctrlCompra extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-            if (request.getParameter("InsertarCompra")!= null) {
+        processRequest(request, response);
 
+        if (request.getParameter("InsertarCompra") != null) {
+            try {
+                String transaccion = generateTransactionId();
+                String fecha = request.getParameter("fechaCompra");
+                String hora = request.getParameter("horaCompra");
+                String montoString = request.getParameter("montoCompra");
+                String proveedorString = request.getParameter("proveedorCompra");
+                String marcaString = request.getParameter("marcaCompra");
+                String metodo = request.getParameter("metodoCompra");
+                String productoString = request.getParameter("productoCompra");
+                String cantidadString = request.getParameter("cantidad");
 
-            String transaccion = request.getParameter("transaccionCompra");
-            String fecha = request.getParameter("fechaCompra");
-            String hora = request.getParameter("horaCompra");
-            String montoString = request.getParameter("montoCompra");
-            String nombreProveedor = request.getParameter("nombreProveedorCompra");
-            String metodo = request.getParameter("metodoCompra");
-            String producto = request.getParameter("producto");
-            String cantidad = request.getParameter("cantidad");
+                if (fecha == null || hora == null || montoString == null || proveedorString == null ||
+                        marcaString == null || metodo == null || productoString == null || cantidadString == null) {
+                    throw new ServletException("Todos los campos son obligatorios.");
+                }
 
-            int id = 1;
-            double monto = Double.parseDouble(montoString);
-            int cantidadpro = Integer.parseInt(cantidad);
+                int proveedor = Integer.parseInt(proveedorString);
+                int marca = Integer.parseInt(marcaString);
+                double monto = Double.parseDouble(montoString);
+                int producto = Integer.parseInt(productoString);
+                int cantidad = Integer.parseInt(cantidadString);
 
-            Compra c = new Compra(id, transaccion, fecha, hora, monto, nombreProveedor, producto,cantidadpro,metodo);
+                Compra c = new Compra(0, transaccion, fecha, hora, monto, proveedor, marca, metodo, producto, cantidad);
 
-
-            if (uDAO.Insertar(c)) {
-                response.sendRedirect(request.getContextPath() + "/Admin/Compra/");
+                if (uDAO.Insertar(c)) {
+                    uDAO.ActualizarCantidad(producto, cantidad);
+                    response.sendRedirect(request.getContextPath() + "/Admin/Compra/");
+                } else {
+                    throw new ServletException("Error al insertar la compra.");
+                }
+            } catch (NumberFormatException e) {
+                throw new ServletException("Error en la conversión de datos: " + e.getMessage());
             }
-            
-            
         }
     }
-
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
+    public String generateTransactionId() {
+        StringBuilder sb = new StringBuilder(LENGTH);
+        for (int i = 0; i < LENGTH; i++) {
+            sb.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
+        }
+        return sb.toString();
+    }
 }

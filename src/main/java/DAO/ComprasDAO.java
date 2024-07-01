@@ -1,4 +1,3 @@
-
 package DAO;
 
 import Modelos.Compra;
@@ -10,36 +9,61 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+public class ComprasDAO extends Conexion {
 
-public class ComprasDAO extends Conexion{
-    
-    public boolean Insertar(Compra v    ) {
+    public boolean Insertar(Compra v) {
         Connection con = getConnection();
         PreparedStatement ps = null;
 
         try {
-            ps = con.prepareStatement("INSERT INTO Compras(transaccion,fecha,hora,monto,proveedor_nombre,metodo_pago,producto,cantidad) VALUES(?,?,?,?,?,?,?,?)");
+            ps = con.prepareStatement("INSERT INTO Compras(transaccion, fecha, hora, monto, proveedor_id, marca_id, metodo_pago, producto_id, cantidad) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, v.getTransaccion());
             ps.setString(2, v.getFecha());
             ps.setString(3, v.getHora());
             ps.setDouble(4, v.getMonto());
-            ps.setString(5, v.getNombreProveedor());
-            ps.setString(6, v.getMetodo());            
-            ps.setString(7, v.getProducto());
-            ps.setInt(8, v.getCantidad());
-
+            ps.setInt(5, v.getProveedor());
+            ps.setInt(6, v.getMarca());
+            ps.setString(7, v.getMetodo());
+            ps.setInt(8, v.getProducto());
+            ps.setInt(9, v.getCantidad());
 
             System.out.println(ps.toString());
             ps.execute();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: " + e);
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
             return false;
-        } 
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    
-      
-    public boolean Eliminar(int id){
+
+    public boolean ActualizarCantidad(int productoId, int nuevaCantidad) {
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+        try {
+            ps = con.prepareStatement("UPDATE Productos SET cantidad = ? WHERE id = ?");
+            ps.setInt(1, nuevaCantidad);
+            ps.setInt(2, productoId);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public boolean Eliminar(int id) {
         PreparedStatement ps = null;
         Connection con = getConnection();
         try {
@@ -48,129 +72,152 @@ public class ComprasDAO extends Conexion{
             ps.execute();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e);
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
             return false;
-            
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
-    
+
     public ArrayList<Compra> Listar() {
         ArrayList<Compra> comprasList = new ArrayList<>();
         PreparedStatement ps = null;
-        ResultSet rs=null;
+        ResultSet rs = null;
         Connection con = getConnection();
         try {
-             ps = con.prepareStatement("SELECT * FROM compras");
-             rs = ps.executeQuery();
-                while (rs.next()) {
-                    Compra v = new Compra();
-                    v.setId(rs.getInt("id"));
-                    v.setTransaccion(rs.getString("transaccion"));
-                    v.setFecha(rs.getString("fecha"));
-                    v.setHora(rs.getString("hora"));
-                    v.setMonto(rs.getDouble("monto"));
-                    v.setNombreProveedor(rs.getString("proveedor_nombre"));
-                    v.setMetodo(rs.getString("metodo_pago"));
-                    v.setProducto(rs.getString("producto"));
-                    v.setCantidad(rs.getInt("cantidad"));
-                    comprasList.add(v);
-                }
-             return comprasList;
-             
-        } catch (SQLException e) {
-            
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e); 
+            ps = con.prepareStatement("SELECT * FROM Compras");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Compra v = new Compra();
+                v.setId(rs.getInt("id"));
+                v.setTransaccion(rs.getString("transaccion"));
+                v.setFecha(rs.getString("fecha"));
+                v.setHora(rs.getString("hora"));
+                v.setMonto(rs.getDouble("monto"));
+                v.setProveedor(rs.getInt("proveedor_id"));
+                v.setMarca(rs.getInt("marca_id"));
+                v.setMetodo(rs.getString("metodo_pago"));
+                v.setProducto(rs.getInt("producto_id"));
+                v.setCantidad(rs.getInt("cantidad"));
+                comprasList.add(v);
+            }
             return comprasList;
-            
-        } 
-    }
-    
-    
-    public Compra ObtenerCompra(int id) {
-        Compra v=new Compra();
-        PreparedStatement ps = null;
-        ResultSet rs=null;
-        Connection con = getConnection();
-        try {
-             ps = con.prepareStatement("SELECT * FROM Compras WHERE id=?");
-             ps.setInt(1, id);
-             rs = ps.executeQuery();
-                while (rs.next()) {
-                    v.setId(rs.getInt("id"));
-                    v.setTransaccion(rs.getString("transaccion"));
-                    v.setFecha(rs.getString("fecha"));
-                    v.setHora(rs.getString("hora"));
-                    v.setMonto(rs.getDouble("monto"));
-                    v.setNombreProveedor(rs.getString("proveedor_nombre"));
-                    v.setMetodo(rs.getString("metodo_pago"));
-                    v.setProducto(rs.getString("producto"));
-                    v.setCantidad(rs.getInt("cantidad"));
-                }
-             return v;
-             
         } catch (SQLException e) {
-            
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e); 
-            return null;
-            
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
+            return comprasList;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
-    public int ObtenerIDgenerado(){
-        PreparedStatement ps=null;
-        ResultSet rs=null;
-        Connection con=getConnection();
+
+    public Compra ObtenerCompra(int id) {
+        Compra v = new Compra();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
         try {
-            ps=con.prepareStatement("SELECT MAX(id) AS IDgenerado FROM Compras");
-            rs=ps.executeQuery();
+            ps = con.prepareStatement("SELECT * FROM Compras WHERE id=?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
             if (rs.next()) {
-                int id=rs.getInt("IDgenerado");
-                return  id;    
-            }        
+                v.setId(rs.getInt("id"));
+                v.setTransaccion(rs.getString("transaccion"));
+                v.setFecha(rs.getString("fecha"));
+                v.setHora(rs.getString("hora"));
+                v.setMonto(rs.getDouble("monto"));
+                v.setProveedor(rs.getInt("proveedor_id"));
+                v.setMarca(rs.getInt("marca_id"));
+                v.setMetodo(rs.getString("metodo_pago"));
+                v.setProducto(rs.getInt("producto_id"));
+                v.setCantidad(rs.getInt("cantidad"));
+            }
+            return v;
         } catch (SQLException e) {
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e); 
-            return 0;
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
+            return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public int ObtenerIDgenerado() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        try {
+            ps = con.prepareStatement("SELECT MAX(id) AS IDgenerado FROM Compras");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("IDgenerado");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return 0;
     }
-    
-    
-    public int Cantidad(){
-        int cantidad=0;
-        PreparedStatement ps=null;
-        Connection con=getConnection();
-        ResultSet rs=null;
+
+    public int Cantidad() {
+        int cantidad = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
         try {
-            ps=con.prepareStatement("SELECT count(*) AS cantidad FROM Compras");
-            rs=ps.executeQuery(); 
+            ps = con.prepareStatement("SELECT count(*) AS cantidad FROM Compras");
+            rs = ps.executeQuery();
             if (rs.next()) {
-                cantidad=Integer.parseInt(rs.getString("cantidad"));
+                cantidad = rs.getInt("cantidad");
             }
         } catch (SQLException e) {
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e);
-            System.out.println(e);
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-      return cantidad;
+        return cantidad;
     }
-    
-    public double GananciaTotal(){
-        double monto=0;
-        PreparedStatement ps=null;
-        Connection con=getConnection();
-        ResultSet rs=null;
+
+    public double GananciaTotal() {
+        double monto = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
         try {
-            ps=con.prepareStatement("SELECT sum(monto) AS monto FROM Compras");
-            rs=ps.executeQuery(); 
+            ps = con.prepareStatement("SELECT sum(monto) AS monto FROM Compras");
+            rs = ps.executeQuery();
             if (rs.next()) {
-                monto=Double.parseDouble(rs.getString("monto"));
+                monto = rs.getDouble("monto");
             }
             return monto;
         } catch (SQLException e) {
-            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, "Error: "+e);
-            System.out.println(e);
+            Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, "Error: ", e);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ComprasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return monto;
     }
-        
 }
